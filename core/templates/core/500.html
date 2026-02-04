@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}500 - Gabim në server{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/errors.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="error403-wrapper">
+  <div class="error403-card">
+    <div class="error403-code">500</div>
+    <h2 class="error403-title">Gabim i brendshëm i serverit</h2>
+    <p class="error403-text">
+      Diçka shkoi keq nga ana jonë. Ju lutem provoni përsëri më vonë.
+    </p>
+    <a class="btn-primary error403-btn" href="{% url 'core:home' %}">
+      Kthehu te Kryesore
+    </a>
+  </div>
+</div>
+{% endblock %}

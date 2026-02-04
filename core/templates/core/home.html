@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Kryesore{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="home-wrapper">
+
+{% if user.is_superuser or user.is_staff %}
+    <!-- MAGAZINA -->
+    <a href="{% url 'inventory:inventory-home' %}" class="home-box">
+        <svg class="home-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10L12 3L21 10V21H3V10Z"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 21V14H17V21"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Magazina</h3>
+    </a>
+
+    <!-- EXPENSES -->
+    <a href="{% url 'expenses:expenses-home' %}" class="home-box">
+        <svg class="home-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2H18V22L15 20L12 22L9 20L6 22V2Z"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 7H15"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round"/>
+            <path d="M9 11H15"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round"/>
+            <path d="M9 15H13"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round"/>
+        </svg>
+        <h3>Shpenzime</h3>
+    </a>
+
+    <!-- KARBURANTI -->
+    <a href="{% url 'fuel:fuel-home' %}" class="home-box">
+        <svg class="home-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2H14V22H6V2Z"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 6H18V14C18 15.66 16.66 17 15 17H14"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 6L21 9V14"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Karburanti</h3>
+    </a>
+
+{% else %}
+
+
+        <!-- MAGAZINA -->
+    <a href="{% url 'inventory:my-returnables' %}" class="home-box">
+        <svg class="home-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10L12 3L21 10V21H3V10Z"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 21V14H17V21"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Magazina</h3>
+    </a>
+    {% if is_admin or user_has_budget %}
+        <!-- EXPENSES -->
+    <a href="{% url 'expenses:expenses-home' %}" class="home-box">
+        <svg class="home-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2H18V22L15 20L12 22L9 20L6 22V2Z"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 7H15"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round"/>
+            <path d="M9 11H15"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round"/>
+            <path d="M9 15H13"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round"/>
+        </svg>
+        <h3>Shpenzime</h3>
+    </a>
+    {% endif %}
+
+{% endif %}
+
+</div>
+{% endblock %}

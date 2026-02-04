@@ -1,0 +1,10 @@
+html, body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
+.content-card, .panel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}

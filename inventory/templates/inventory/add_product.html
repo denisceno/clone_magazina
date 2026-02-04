@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Hyrje Në Magazinë{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/add_product.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="form-card">
+    <h3>Hyrje në Magazinë</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-fields">
+            {{ form.as_p }}
+        </div>
+
+        <button class="form-submit">Ruaj Hyrjen</button>
+    </form>
+</div>
+
+{% endblock %}

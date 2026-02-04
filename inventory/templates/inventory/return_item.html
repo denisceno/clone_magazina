@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Rikthim Materiali Në Magazinë{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/return_item.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="form-card">
+    <h3>Rikthe Materialin në Magazinë</h3>
+
+    <div class="form-fields">
+
+        <!-- READ-ONLY INFO (FULL WIDTH) -->
+        <p class="full-width">
+            <strong>Punonjësi:</strong> {{ employee.name }}
+        </p>
+
+        <p class="full-width">
+            <strong>Materiali:</strong> {{ product.name }}
+        </p>
+
+        <p class="full-width">
+            <strong>Për tu Rikthyer:</strong>
+            <span class="rikthyer-qty">{{ withdrawal_item.outstanding_qty }}</span>
+        </p>
+
+        {% if error %}
+            <p class="full-width errorlist">
+                {{ error }}
+            </p>
+        {% endif %}
+
+        <!-- FORM -->
+        <form method="POST" class="full-width">
+            {% csrf_token %}
+
+            <p class="full-width">
+                <label for="id_quantity">Sasia që do Rikthehet</label>
+                <input
+                    id="id_quantity"
+                    type="number"
+                    name="quantity"
+                    step="1"
+                    required
+                >
+            </p>
+
+            <button type="submit" class="form-submit">
+                Konfirmo Rikthimin
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

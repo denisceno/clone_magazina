@@ -1,0 +1,234 @@
+/* ======================================================
+   INVENTORY HOME ONLY (SCOPED) — DOES NOT TOUCH NAVBAR
+====================================================== */
+
+.inv-home {
+  /* page spacing so content doesn't stick to navbar */
+  padding-top: 18px;
+}
+
+/* ======================================================
+   HERO CARD (Magazina Kryesore)
+====================================================== */
+.inv-home .hero-card {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 22px;
+  max-width: 900px;
+  margin: 30px auto 55px;
+  box-shadow: 0 12px 40px rgba(12, 117, 255, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 0;
+}
+
+.inv-home .hero-card a {
+  display: block;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none !important;
+  border-radius: 22px;
+}
+
+.inv-home .hero-card h4 {
+  font-size: 36px;
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.inv-home .hero-card:hover {
+  transform: translateY(-7px) scale(1.01);
+  box-shadow: 0 20px 55px rgba(12, 117, 255, 0.4);
+}
+
+/* ======================================================
+   BUTTON BAR — 2 + 1 LAYOUT
+====================================================== */
+.inv-home .page-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 520px;
+  margin: 0 auto 45px;
+  padding: 0 16px;
+}
+
+.inv-home .page-actions a:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+/* Base button for this page only */
+.inv-home .inv-btn {
+  width: 100%;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 12px;
+
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+
+  box-shadow: 0 4px 14px rgba(63, 90, 255, 0.25);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+/* hover */
+.inv-home .inv-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(63, 90, 255, 0.35);
+}
+
+/* colors (intentionally NOT global) */
+.inv-home .inv-btn-hyrje {
+  background: #27ae60;
+}
+.inv-home .inv-btn-hyrje:hover {
+  filter: brightness(0.9);
+}
+
+.inv-home .inv-btn-dalje {
+  background: rgb(197, 0, 0);
+}
+.inv-home .inv-btn-dalje:hover {
+  filter: brightness(0.9);
+}
+
+.inv-home .inv-btn-neutral {
+  background: var(--primary-500);
+}
+.inv-home .inv-btn-neutral:hover {
+  filter: brightness(0.92);
+}
+
+/* ======================================================
+   DEPOT GRID SPACING
+====================================================== */
+.inv-home .depot-grid {
+  padding: 0 32px;
+}
+
+/* ======================================================
+   INVENTORY DEPOT CARDS
+====================================================== */
+.inv-home .inventory-card {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  height: 185px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.inv-home .inventory-card h4 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.inv-home .inventory-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(23, 36, 79, 0.15);
+}
+
+/* ======================================================
+   INACTIVE DEPOT — explicit red (NOT globalized)
+====================================================== */
+.inventory-card-inactive {
+  background: linear-gradient(135deg, #fee2e2, #fecaca) !important;
+  border: 2px solid #ef4444 !important;
+  color: #7f1d1d !important;
+  opacity: 0.9 !important; 
+}
+
+.inventory-card-inactive h4 {
+  color: #7f1d1d !important;
+}
+
+.inventory-card-inactive:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+/* ======================================================
+   DARK MODE — glass correction only
+====================================================== */
+:root[data-theme="dark"] .inv-home .hero-card,
+:root[data-theme="dark"] .inv-home .inventory-card {
+  background: rgba(15, 26, 43, 0.72);
+}
+
+/* ======================================================
+   MOBILE
+====================================================== */
+@media (max-width: 768px) {
+  .inv-home .hero-card {
+    margin: 20px 16px 35px;
+  }
+
+  .inv-home .hero-card a {
+    padding: 36px 24px;
+  }
+
+  .inv-home .hero-card h4 {
+    font-size: 26px;
+  }
+
+  .inv-home .inv-btn {
+    font-size: 15px;
+    padding: 14px 18px;
+  }
+
+  .inv-home .depot-grid {
+    padding: 0 16px;
+  }
+
+  /* Force 2 columns on mobile if using Bootstrap row */
+  .inv-home .depot-grid > .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .inv-home .inventory-card {
+    height: auto;
+    padding: 22px 16px;
+  }
+
+  .inv-home .inventory-card h4 {
+    font-size: 18px;
+  }
+
+  /* Disable hover lift on touch */
+  .inv-home .inventory-card:hover,
+  .inv-home .hero-card:hover,
+  .inv-home .inv-btn:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+}
+
+@media (max-width: 480px) {
+  .inv-home .depot-grid {
+    padding: 0 12px;
+  }
+}
+
+/* Fix horizontal overflow caused by Bootstrap row negative margins + padding */
+.inv-home .depot-grid{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px ;
+}

@@ -1,0 +1,307 @@
+/* ===========================
+   NAVBAR — CLEAN MODERN (TOKEN BASED, DARK MODE READY)
+=========================== */
+
+.app-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-navbar__inner {
+  min-height: 64px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+}
+
+/* Brand */
+.app-brand {
+  font-weight: 950;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 14px;
+  transition: background 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.app-brand:hover {
+  background: var(--bg-muted);
+  transform: translateY(-1px);
+}
+
+/* Pending badge */
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  margin-left: 8px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1;
+
+  background: color-mix(in srgb, #f59e0b 16%, var(--bg-card));
+  color: color-mix(in srgb, #f59e0b 70%, var(--text-primary));
+  border: 1px solid color-mix(in srgb, #f59e0b 32%, var(--border-color));
+}
+
+.app-badge--mobile { margin-left: 10px; }
+
+/* Toggler */
+.app-toggler {
+  border-radius: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+
+/* Make bootstrap hamburger visible in dark mode */
+:root[data-theme="dark"] .navbar-toggler-icon {
+  filter: invert(1) grayscale(1) contrast(2);
+}
+
+/* Desktop centering */
+.app-left-spacer { width: 140px; }
+
+.app-center-wrap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.app-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.app-link {
+  font-weight: 900;
+  font-size: 18px !important;
+  letter-spacing: -0.3px;
+  color: var(--text-primary) !important;
+  text-decoration: none;
+  padding: 10px 14px !important;
+  border-radius: 999px;
+  transition: background 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.app-link:hover {
+  background: var(--bg-muted);
+  transform: translateY(-1px);
+}
+
+.app-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* Username */
+.app-user {
+  font-weight: 950;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-user:hover {
+  background: color-mix(in srgb, var(--bg-muted) 70%, var(--bg-card));
+}
+
+/* Audit / Management pill */
+.app-audit {
+  font-weight: 950;
+  color: color-mix(in srgb, #f59e0b 65%, var(--text-primary));
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, #f59e0b 12%, var(--bg-card));
+  border: 1px solid color-mix(in srgb, #f59e0b 28%, var(--border-color));
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-audit:hover {
+  background: color-mix(in srgb, #f59e0b 18%, var(--bg-card));
+}
+
+/* Logout */
+.app-logout {
+  font-weight: 950;
+  border-radius: 12px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, #ef4444 35%, var(--border-color));
+  background: color-mix(in srgb, #ef4444 12%, var(--bg-card));
+  color: color-mix(in srgb, #ef4444 70%, var(--text-primary));
+  transition: transform 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+}
+
+.app-logout:hover {
+  background: color-mix(in srgb, #ef4444 18%, var(--bg-card));
+  transform: translateY(-1px);
+}
+
+/* Offcanvas */
+.app-offcanvas {
+  border-left: 1px solid var(--border-color);
+  background: var(--bg-card);
+  z-index: 1055 !important;
+  pointer-events: auto !important;
+}
+
+.offcanvas-backdrop { z-index: 1040 !important; }
+
+.app-offcanvas__header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-offcanvas__title {
+  font-weight: 1000;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.app-offcanvas__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.app-offcanvas__userbox {
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.app-offcanvas__toplink {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.app-offcanvas__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Offcanvas header: keep title left and X right */
+.app-offcanvas__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app-offcanvas__header-right {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.app-mobile-link {
+  display: block;
+  text-decoration: none;
+  font-weight: 950;
+  color: var(--text-primary);
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.app-mobile-link:hover {
+  background: var(--bg-muted);
+  transform: translateY(-1px);
+}
+
+.app-offcanvas__logout { margin-top: auto; }
+
+.app-offcanvas a,
+.app-offcanvas button {
+  pointer-events: auto !important;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .app-offcanvas { width: 320px; }
+  .app-center-wrap { position: static; transform: none; }
+  .app-left-spacer { display: none; }
+}
+
+@media (max-width: 420px) {
+  .app-offcanvas { width: 86vw; }
+}
+
+/* Height reduction */
+.app-navbar__inner { min-height: 52px; padding: 6px 16px; }
+.app-brand { padding: 6px 12px; border-radius: 12px; }
+.app-link { padding: 6px 12px !important; font-size: 15px; }
+.app-user, .app-audit, .app-logout { padding: 6px 10px; font-size: 14px; }
+.app-toggler { padding: 6px 8px; }
+
+/* ===========================
+   MOBILE FIX — TOGGLE OUTSIDE HAMBURGER
+=========================== */
+
+@media (max-width: 991px) {
+
+  .app-navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .app-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+
+  .app-toggler {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    line-height: 1;
+  }
+}
+/* Make bootstrap close icon visible in dark mode */
+:root[data-theme="dark"] .app-close {
+  filter: invert(1) grayscale(1) contrast(2);
+  opacity: 0.9;
+}
+
+:root[data-theme="dark"] .app-close:hover {
+  opacity: 1;
+}

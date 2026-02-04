@@ -1,0 +1,358 @@
+/* ======================================================
+   FUEL HOME — ADAPTED TO GLOBAL TOKENS (NO LAYOUT CHANGE)
+   Uses variables from global.css for light/dark mode.
+====================================================== */
+
+/* Page background + default text for this page only */
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
+/* Optional: make hr match theme (only used on this page) */
+.fuel-divider {
+  width: min(1100px, 92%);
+  margin: 18px auto;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  opacity: 0.9;
+}
+
+.fuel-title {
+  text-align: center;
+  margin: 18px 0 10px;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.fuel-links {
+  text-align: center;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* ===========================
+   BUTTON (BASE)
+=========================== */
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+
+  background: var(--primary-500);
+  color: #fff;
+
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 700;
+
+  border: 1px solid transparent;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: var(--primary-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Keep old behavior: green + red buttons */
+.button-success {
+  background: #27ae60;
+}
+.button-success:hover {
+  background: color-mix(in srgb, #27ae60 82%, #000);
+}
+
+.button-danger {
+  background: rgb(226, 55, 55);
+}
+.button-danger:hover {
+  background: color-mix(in srgb, rgb(226, 55, 55) 82%, #000);
+}
+
+/* ===========================
+   TOP TANKS AREA
+=========================== */
+.fuel-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin: 40px auto;
+  width: 100%;
+}
+
+.tank-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.tank-card {
+  background: var(--bg-card);
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-color);
+  padding: 20px;
+
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+
+  width: 350px;
+  text-align: center;
+}
+
+/* NOTE: class name kept as-is to match template */
+.cureent-level {
+  color: #27ae60;
+  font-size: 50px;
+  font-weight: 800;
+}
+
+.need-refill {
+  color: rgb(226, 55, 55);
+  font-size: 50px;
+  font-weight: 800;
+}
+
+/* ===========================
+   BUTTON ROWS
+=========================== */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto 40px;
+}
+
+/* only layout behavior here */
+.button-row .button {
+  text-align: center;
+}
+
+/* ===========================
+   TABLE
+   - Uses your layout, but theme-aware
+   - Also neutralizes some Bootstrap defaults on .table
+=========================== */
+.table {
+  /* Bootstrap table variables (safe override) */
+  --bs-table-bg: var(--bg-card);
+  --bs-table-color: var(--text-secondary);
+  --bs-table-border-color: var(--border-color);
+  --bs-table-hover-bg: color-mix(in srgb, var(--primary-100) 40%, var(--bg-card));
+  --bs-table-hover-color: var(--text-primary);
+
+  width: 90%;
+  margin: 40px auto;
+  border-collapse: collapse;
+
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+
+  border-radius: 12px;
+  overflow: hidden;
+
+  box-shadow: var(--shadow-md);
+}
+
+.table thead {
+  background: var(--primary-500);
+  color: #fff;
+  font-weight: 800;
+}
+
+.table th,
+.table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.table thead th {
+  color: #fff;
+}
+
+.table tbody tr:hover {
+  background: color-mix(in srgb, var(--primary-100) 40%, var(--bg-card));
+}
+
+/* Empty state */
+.table-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 16px;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+@media (max-width: 768px) {
+  .button {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+
+  /* touch: avoid sticky hover */
+  .button:hover {
+    background: var(--primary-500);
+    transform: none;
+    box-shadow: none;
+  }
+
+  .button-success:hover { background: #27ae60; }
+  .button-danger:hover  { background: rgb(226, 55, 55); }
+
+  .fuel-box {
+    margin: 20px 0;
+    gap: 18px;
+  }
+
+  .tank-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .tank-card {
+    width: auto;
+    margin: 0 14px;
+    padding: 18px;
+  }
+
+  .cureent-level,
+  .need-refill {
+    font-size: 36px;
+  }
+
+  .table {
+    width: 100%;
+    margin: 20px 0;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    border-radius: 10px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+
+  .table tbody tr:hover {
+    background: inherit;
+  }
+
+  .button-row {
+    flex-direction: column;
+    gap: 14px;
+    margin: 20px 14px 30px;
+  }
+
+  .button-row .button {
+    width: 100%;
+  }
+
+  .fuel-links {
+    margin: 20px 14px;
+    gap: 14px;
+  }
+
+  .fuel-links .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cureent-level,
+  .need-refill {
+    font-size: 32px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+}
+
+/* ===========================
+   TANK REFILL STATUS BOX
+=========================== */
+
+.tank-refill-box{
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg-muted) 60%, var(--bg-card));
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-pill{
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.status-open{
+  background: rgba(16,185,129,.15);
+  color: #065f46;
+}
+
+.status-closed{
+  background: rgba(239,68,68,.12);
+  color: #991b1b;
+}
+
+.status-muted{
+  background: rgba(148,163,184,.15);
+  color: #475569;
+}
+
+.remaining-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  font-size: 13px;
+}
+
+.remaining-box strong{
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.btn-close-refill{
+  margin-top: 6px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  background: #ef4444;
+  color: white;
+}
+
+.btn-close-refill:hover{
+  filter: brightness(0.95);
+}

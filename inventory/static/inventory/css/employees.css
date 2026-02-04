@@ -1,0 +1,384 @@
+/* ======================================================
+   LAYOUT
+====================================================== */
+.employee-container {
+  display: flex;
+  height: calc(100vh - 60px);
+  gap: 0;
+  margin: 0;
+}
+
+/* ======================================================
+   SIDEBAR
+====================================================== */
+.employee-sidebar {
+  width: 320px;
+  background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-muted) 100%);
+  border-right: 2px solid var(--border-color);
+  overflow-y: auto;
+  padding: 30px 20px;
+}
+
+.employee-sidebar h4 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.employee-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.employee-list-item {
+  display: block;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+
+  color: #475569; /* keep exact in LIGHT */
+  text-decoration: none;
+
+  transition: 0.2s ease;
+  font-weight: 500;
+  text-align: center;
+  word-break: break-word;
+}
+
+.employee-list-item:hover {
+  background: var(--bg-muted);
+  border-color: rgba(203, 213, 225, 0.9); /* keep exact in LIGHT */
+  transform: translateX(4px);
+  color: var(--text-primary);
+}
+
+.employee-list-item.active {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+  border-color: var(--primary-600);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* ======================================================
+   CONTENT
+====================================================== */
+.employee-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 50px;
+  background: var(--bg-card);
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  margin-top: 120px;
+}
+
+.empty-state h4 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: #94a3b8; /* keep exact in LIGHT */
+}
+
+/* HEADER */
+.employee-header {
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.employee-header h3 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-align: center;
+}
+
+.employee-header p {
+  font-size: 20px;
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+}
+
+/* ======================================================
+   TABLE
+====================================================== */
+.styled-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  table-layout: fixed;
+}
+
+.styled-table thead {
+  background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-muted) 100%);
+}
+
+.styled-table thead th {
+  padding: 12px 10px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #475569; /* keep exact in LIGHT */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+}
+
+.styled-table tbody td {
+  padding: 10px 10px;
+  color: var(--text-primary);
+  font-size: 15px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.styled-table tbody tr {
+  transition: 0.2s ease;
+}
+
+.styled-table tbody tr:hover {
+  background: #ebf5ff; /* keep exact in LIGHT */
+}
+
+.styled-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Column widths */
+.styled-table th:first-child,
+.styled-table td:first-child {
+  width: 45%;
+  text-align: left;
+}
+
+.styled-table th:nth-child(2),
+.styled-table td:nth-child(2) {
+  width: 15%;
+}
+
+.styled-table th:nth-child(3),
+.styled-table td:nth-child(3) {
+  width: 20%;
+}
+
+.styled-table th:last-child,
+.styled-table td:last-child {
+  width: 20%;
+}
+
+/* Empty row */
+.empty-row {
+  text-align: center !important;
+  color: #94a3b8; /* keep exact in LIGHT */
+  font-style: italic;
+  padding: 30px 16px !important;
+}
+
+/* ======================================================
+   RETURN BUTTON
+====================================================== */
+.return-btn {
+  padding: 8px 14px;
+  background: #27ae60;
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.2s ease;
+}
+
+.return-btn:hover {
+  background: #07642e;
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.return-btn:active {
+  transform: translateY(0);
+}
+
+/* ======================================================
+   SCROLLBAR (optional)
+====================================================== */
+.employee-sidebar::-webkit-scrollbar,
+.employee-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.employee-sidebar::-webkit-scrollbar-track,
+.employee-content::-webkit-scrollbar-track {
+  background: var(--bg-muted);
+}
+
+.employee-sidebar::-webkit-scrollbar-thumb,
+.employee-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* keep exact in LIGHT */
+  border-radius: 4px;
+}
+
+.employee-sidebar::-webkit-scrollbar-thumb:hover,
+.employee-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* keep exact in LIGHT */
+}
+
+/* ======================================================
+   DARK MODE — override the “keep exact tone” LIGHT colors
+====================================================== */
+:root[data-theme="dark"] .employee-list-item {
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .employee-list-item:hover {
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .empty-state p,
+:root[data-theme="dark"] .empty-row {
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .styled-table thead th {
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .styled-table tbody tr:hover {
+  background: rgba(76, 141, 255, 0.10);
+}
+
+:root[data-theme="dark"] .employee-sidebar::-webkit-scrollbar-thumb,
+:root[data-theme="dark"] .employee-content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+}
+
+:root[data-theme="dark"] .employee-sidebar::-webkit-scrollbar-thumb:hover,
+:root[data-theme="dark"] .employee-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.65);
+}
+
+/* ======================================================
+   MOBILE
+====================================================== */
+@media (max-width: 768px) {
+  .employee-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .employee-sidebar {
+    width: 100%;
+    padding: 16px 14px;
+    border-right: none;
+    border-bottom: 2px solid var(--border-color);
+    overflow: visible;
+  }
+
+  .employee-sidebar h4 {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .employee-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .employee-list-item {
+    margin: 0;
+    padding: 12px 10px;
+    font-size: 14px;
+    transform: none;
+    min-height: 44px;
+  }
+
+  .employee-list-item:hover {
+    transform: none;
+  }
+
+  .employee-content {
+    padding: 20px 14px;
+  }
+
+  .employee-header h3 {
+    font-size: 24px;
+  }
+
+  .employee-header p {
+    font-size: 16px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .styled-table {
+    min-width: 680px;
+  }
+
+  .styled-table thead th,
+  .styled-table tbody td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .styled-table tbody tr:hover {
+    background: inherit;
+  }
+
+  .return-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .return-btn:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .employee-header h3 {
+    font-size: 22px;
+  }
+
+  .return-btn {
+    font-size: 12px;
+    padding: 10px 10px;
+  }
+}

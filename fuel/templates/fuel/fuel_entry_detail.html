@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Furnizimi {{ entry.date|date:"d.m.Y" }} {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fuel/css/fuel_entry_detail.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="fuel-card">
+
+    <h3 class="section-title">Furnizimi</h3>
+
+    <div class="entry-details">
+        <p class="entry-date">{{ entry.date|date:"d.m.Y" }}</p>
+
+        <div class="entry-info-line">
+            <span><strong>Depozita:</strong> {{ entry.tank.name }}</span>
+            <span><strong>Sasia e Furnizimit (L):</strong> {{ entry.amount }}</span>
+            <span><strong>Furnizuesi:</strong> {{ entry.supplier|default:"—" }}</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3 class="section-title">Përdorimet e Karburantit</h3>
+
+    {% if usages %}
+
+        <!-- VEHICLE SUMMARY CARDS -->
+        <div class="vehicle-report-container">
+            {% for vehicle, stats in vehicle_report %}
+            <div class="vehicle-card">
+                <h4>{{ vehicle }}</h4>
+                <p><strong>Nr. furnizimeve:</strong> {{ stats.count }}</p>
+                <p><strong>Sasia totale (L):</strong> {{ stats.total }}</p>
+            </div>
+            {% empty %}
+            <p style="text-align:center;">Nuk ka të dhëna për mjete.</p>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+        <!-- IMPROVED TABLE -->
+        <div class="table-wrapper">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Targa e Mjetit</th>
+                        <th>Sasia (L)</th>
+                        <th>Operatori</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in usages %}
+                    <tr>
+                        <td>{{ u.date|date:"d.m.Y" }}</td>
+                        <td>{{ u.vehicle }}</td>
+                        <td>{{ u.amount }}</td>
+                        <td>{{ u.operator }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% else %}
+
+        <p class="no-usage">Nuk ka përdorime të regjistruara për këtë furnizim.</p>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

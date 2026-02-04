@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Fshi Produktin{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/delete_product_confirm.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="delete-wrapper">
+  <div class="delete-card">
+    <h3>Konfirmo fshirjen</h3>
+    <p>
+      Je i sigurt që do ta fshish produktin:
+      <strong>{{ product.name }}</strong>?
+    </p>
+
+    <form method="post" class="delete-actions">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Po, fshije</button>
+      <a href="{% url 'inventory:product-detail' product.id %}" class="btn btn-secondary">Anulo</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Të Gjitha Magazinat — Të Gjith Materialet{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/all_products.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="page-header">
+  <h2>Të Gjitha Magazinat — Të Gjith Materialet</h2>
+</div>
+
+<div class="products-page">
+
+  <!-- IMPORTANT:
+       Remove method=GET behavior from typing (we keep it, but we prevent submit)
+       and do client-side filtering instead.
+  -->
+  <form method="GET" class="search-bar" id="search-form">
+    <input
+      type="text"
+      id="live-search"
+      name="q"
+      value="{{ search }}"
+      placeholder="Kërko Materialin..."
+      autocomplete="off"
+    />
+  </form>
+
+  <div class="table-wrapper">
+    <table class="styled-table" id="products-table">
+      <thead>
+        <tr>
+          <th>
+            <a href="?sort=name{% if search %}&q={{ search }}{% endif %}">Emri ▲</a>
+            <a href="?sort=name_desc{% if search %}&q={{ search }}{% endif %}">▼</a>
+          </th>
+          <th>
+            <a href="?sort=qty{% if search %}&q={{ search }}{% endif %}">Sasia ▲</a>
+          </th>
+          <th>
+            <a href="?sort=depot{% if search %}&q={{ search }}{% endif %}">Magazina ▲</a>
+          </th>
+          <th>Kategoria</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for product in products %}
+        <tr class="product-row"
+            data-name="{{ product.name|lower }}"
+            data-depot="{{ product.depot.name|lower }}"
+            data-type="{{ product.get_item_type_display|lower }}">
+          <td>
+            <a class="product-link" href="{% url 'inventory:product-detail' product.id %}">
+              {{ product.name }}
+            </a>
+          </td>
+
+          <td>
+            {% if product.item_type == "returnable" %}
+              {{ product.total_quantity }}{% if product.unit != "pcs" %} {{ product.get_unit_display }}{% endif %}
+              <span class="muted">
+                ({{ product.quantity }}{% if product.unit != "pcs" %} {{ product.get_unit_display }}{% endif %} në Magazina)
+              </span>
+            {% else %}
+              {{ product.quantity }}{% if product.unit != "pcs" %} {{ product.get_unit_display }}{% endif %}
+            {% endif %}
+          </td>
+
+          <td>{{ product.depot.name }}</td>
+          <td>{{ product.get_item_type_display }}</td>
+        </tr>
+        {% empty %}
+        <tr id="no-results-row">
+          <td colspan="4" class="text-center no-results">No products found</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  const searchInput = document.getElementById("live-search");
+  const form = document.getElementById("search-form");
+  const rows = document.querySelectorAll("#products-table tbody .product-row");
+  const noResultsRow = document.getElementById("no-results-row");
+
+  // prevent Enter submit (optional)
+  form.addEventListener("submit", (e) => e.preventDefault());
+
+  function filterRows() {
+    const q = (searchInput.value || "").trim().toLowerCase();
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      // Search across name + depot + category (you can reduce to only name if you want)
+      const haystack =
+        (row.dataset.name || "") + " " +
+        (row.dataset.depot || "") + " " +
+        (row.dataset.type || "");
+
+      const match = haystack.includes(q);
+
+      row.style.display = match ? "" : "none";
+      if (match) visibleCount++;
+    });
+
+    // Show/hide "No products found" row (if it exists)
+    if (noResultsRow) {
+      noResultsRow.style.display = (visibleCount === 0) ? "" : "none";
+    }
+  }
+
+  // Live filter while typing (no reload)
+  searchInput.addEventListener("input", filterRows);
+
+  // If page was opened with a prefilled search value, apply filter immediately
+  filterRows();
+</script>
+
+{% endblock %}

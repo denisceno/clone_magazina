@@ -1,0 +1,98 @@
+/* ======================================================
+   DELETE PRODUCT CONFIRMATION
+====================================================== */
+
+/* Page wrapper */
+.delete-wrapper {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 18px;
+}
+
+/* Card */
+.delete-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 26px 28px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Title */
+.delete-card h3 {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+/* Text */
+.delete-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.delete-card strong {
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+/* Actions */
+.delete-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.delete-actions .btn {
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+/* Danger button refinement */
+.delete-actions .btn-danger {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.delete-actions .btn-danger:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+/* Cancel button */
+.delete-actions .btn-secondary {
+  background: var(--bg-muted);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.delete-actions .btn-secondary:hover {
+  background: var(--primary-100);
+  color: var(--primary-600);
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .delete-card {
+    padding: 22px 20px;
+  }
+
+  .delete-card h3 {
+    font-size: 22px;
+  }
+
+  .delete-actions {
+    flex-direction: column;
+  }
+
+  .delete-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

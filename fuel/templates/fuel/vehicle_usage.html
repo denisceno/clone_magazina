@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Daljet sipas Targave {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fuel/css/vehicle_usage.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="employee-container">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="employee-sidebar">
+        <h4>Zgjidh Targën</h4>
+
+        <ul class="employee-list">
+            {% for v in vehicles %}
+                <li>
+                    <a 
+                      href="?vehicle={{ v.id }}" 
+                      class="employee-list-item {% if selected_vehicle == v.id %}active{% endif %}"
+                    >
+                        {{ v.plate }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="employee-content">
+
+
+        {% if usage_groups %}
+        
+            {% for refill, data in usage_groups.items %}
+            
+                <h4 class="section-title">
+                    Furnizimi: {{ refill.date|date:"d/m/Y" }} — {{ refill.amount }} L
+                </h4>
+            <div class="table-scroll">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Sasia (L)</th>
+                            <th>Shoferi</th>
+                            <th>Shënime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for u in data.usages %}
+                        <tr>
+                            <td>{{ u.date|date:"d/m/Y" }}</td>
+                            <td><strong>{{ u.amount }}</strong></td>
+                            <td>{{ u.operator|default:"—" }}</td>
+                            <td>{{ u.project|default:"—" }}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <!-- 🔥 TOTAL FOR THIS REFILL -->
+                        <tr class="total-row">
+                            <td colspan="4" class="total-cell">TOTAL I KONSUMUAR: {{ data.total }} L</td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+</div>
+                <br><br>
+
+            {% endfor %}
+
+        {% elif selected_vehicle %}
+            <div class="empty-state">
+                <h4>Nuk ka dalje për këtë targë.</h4>
+            </div>
+
+        {% else %}
+            <div class="empty-state">
+                <h4>Zgjidh një targë për të parë furnizimet me karburant</h4>
+            </div>
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}

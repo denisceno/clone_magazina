@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Regjistro Shpenzim{% endblock%}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'expenses/css/expense_form.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="form-card">
+
+  <h3>Regjistro Shpenzim</h3>
+
+  <form method="post">
+    {% csrf_token %}
+
+<div class="form-fields">
+  {% for field in form %}
+    <p class="{% if field.name == 'description' %}span-2{% endif %}">
+      {{ field.label_tag }}
+      {{ field }}
+      {{ field.errors }}
+    </p>
+  {% endfor %}
+</div>
+
+
+
+    <button type="submit" class="form-submit">Ruaj</button>
+  </form>
+
+  <div class="form-back">
+    <a href="{% url 'expenses:expenses-home' %}">← Kthehu</a>
+  </div>
+
+</div>
+
+{% endblock %}

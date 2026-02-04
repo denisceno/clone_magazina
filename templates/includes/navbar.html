@@ -1,0 +1,197 @@
+{% load rbac_tags %}
+
+<nav class="navbar navbar-expand-lg app-navbar">
+  <div class="container-fluid app-navbar__inner">
+
+    {% with is_admin=user.is_superuser is_staff_rbac=user|has_group:"staff" %}
+
+    <!-- LEFT / BRAND -->
+    {% if is_admin or is_staff_rbac %}
+      <a class="navbar-brand app-brand" href="{% url 'core:home' %}">Kryesore</a>
+    {% endif %}
+
+    <!-- MOBILE: Toggle outside the hamburger -->
+<div class="app-controls ms-auto d-lg-none d-flex align-items-center gap-2">
+
+  <!-- Pretty toggle (mobile) -->
+  <label class="theme-switch theme-switch--pretty theme-switch--pretty-compact">
+    <input type="checkbox" id="themeToggleOffcanvas">
+    <span class="theme-track" aria-hidden="true">
+      <span class="theme-ico theme-ico--sun"></span>
+      <span class="theme-ico theme-ico--moon"></span>
+      <span class="theme-thumb"></span>
+    </span>
+  </label>
+
+  <!-- Hamburger -->
+  <button
+    class="navbar-toggler app-toggler"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#appOffcanvas"
+    aria-controls="appOffcanvas"
+    aria-label="Open menu"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+</div>
+
+
+    <!-- DESKTOP: Pretty toggle -->
+    <div class="d-none d-lg-flex align-items-center ms-3">
+      <label class="theme-switch theme-switch--pretty">
+        <input type="checkbox" id="themeToggleDesktop">
+        <span class="theme-track" aria-hidden="true">
+          <span class="theme-ico theme-ico--sun"></span>
+          <span class="theme-ico theme-ico--moon"></span>
+          <span class="theme-thumb"></span>
+        </span>
+        <span class="theme-label ms-2"></span>
+      </label>
+    </div>
+
+    <!-- DESKTOP NAV -->
+    <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+
+      <div class="app-left-spacer"></div>
+
+      <!-- CENTER LINKS -->
+      <div class="app-center-wrap">
+        <ul class="navbar-nav app-nav-center">
+
+          {% if is_admin or is_staff_rbac %}
+            <li class="nav-item">
+              <a class="nav-link app-link" href="{% url 'inventory:inventory-home' %}">
+                Magazina
+              </a>
+            </li>
+          {% endif %}
+
+          {% if is_admin or user_has_budget %}
+          <li class="nav-item">
+            <a class="nav-link app-link" href="{% url 'expenses:expenses-home' %}">
+              Shpenzime
+            </a>
+          </li>
+          {% endif %}
+
+
+          {% if is_admin or is_staff_rbac %}
+            <li class="nav-item">
+              <a class="nav-link app-link" href="{% url 'fuel:fuel-home' %}">
+                Karburanti
+              </a>
+            </li>
+          {% endif %}
+
+          {% if not is_admin and not is_staff_rbac %}
+            <li class="nav-item">
+              <a class="nav-link app-link" href="{% url 'inventory:my-returnables' %}">
+                Për t'u Rikthyer
+                {% if my_returnables_count %}
+                  <span class="app-badge">{{ my_returnables_count }}</span>
+                {% endif %}
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="app-right ms-auto">
+
+        {% if is_admin %}
+          <a class="app-audit" href="{% url 'management:dashboard' %}">Management</a>
+          <a class="app-audit" href="{% url 'audit:audit-dashboard' %}">Audit</a>
+
+          <a class="app-user" href="{% url 'admin:index' %}" title="Open admin panel">
+            {{ user.username }}
+          </a>
+        {% else %}
+          <a class="app-user" href="{% url 'accounts:password_change' %}">{{ user.username }}</a>
+        {% endif %}
+
+        <form method="POST" action="{% url 'accounts:logout' %}" class="m-0">
+          {% csrf_token %}
+          <button class="btn app-logout" type="submit">Logout</button>
+        </form>
+
+      </div>
+    </div>
+
+    {% endwith %}
+  </div>
+</nav>
+
+<!-- OFFCANVAS MOBILE MENU -->
+<div
+  class="offcanvas offcanvas-end app-offcanvas"
+  tabindex="-1"
+  id="appOffcanvas"
+  aria-labelledby="appOffcanvasLabel"
+>
+  <!-- Apple-style header row with pretty toggle -->
+  <div class="offcanvas-header app-offcanvas__header app-offcanvas__header--apple">
+    <div class="app-offcanvas__title" id="appOffcanvasLabel">Menu</div>
+
+    <div class="app-offcanvas__header-right">
+
+      <button type="button" class="btn-close app-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="offcanvas-body app-offcanvas__body">
+
+    {% with is_admin=user.is_superuser is_staff_rbac=user|has_group:"staff" %}
+
+    <!-- USER / ADMIN / AUDIT -->
+    <div class="app-offcanvas__userbox">
+      {% if is_admin %}
+        <a class="app-audit app-offcanvas__toplink" href="{% url 'management:dashboard' %}">Management</a>
+        <a class="app-audit app-offcanvas__toplink" href="{% url 'audit:audit-dashboard' %}">Audit</a>
+        <a class="app-user app-offcanvas__toplink" href="{% url 'admin:index' %}">
+          {{ user.username }}
+        </a>
+      {% else %}
+        <a class="app-user app-offcanvas__toplink" href="{% url 'accounts:password_change' %}">
+          {{ user.username }}
+        </a>
+      {% endif %}
+
+    </div>
+
+    <!-- MOBILE LINKS -->
+    <div class="app-offcanvas__nav">
+      {% if is_admin or is_staff_rbac %}
+        <a class="app-mobile-link" href="{% url 'core:home' %}">Kryesore</a>
+        <a class="app-mobile-link" href="{% url 'inventory:inventory-home' %}">Magazina</a>
+      {% endif %}
+
+      {% if is_admin or user_has_budget %}
+      <a class="app-mobile-link" href="{% url 'expenses:expenses-home' %}">Shpenzime</a>
+      {% endif %}
+
+      {% if is_admin or is_staff_rbac %}
+        <a class="app-mobile-link" href="{% url 'fuel:fuel-home' %}">Karburanti</a>
+      {% endif %}
+
+      {% if not is_admin and not is_staff_rbac %}
+        <a class="app-mobile-link" href="{% url 'inventory:my-returnables' %}">
+          Për t'u Rikthyer
+          {% if my_returnables_count %}
+            <span class="app-badge app-badge--mobile">{{ my_returnables_count }}</span>
+          {% endif %}
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- LOGOUT -->
+    <form method="POST" action="{% url 'accounts:logout' %}" class="app-offcanvas__logout">
+      {% csrf_token %}
+      <button class="btn app-logout w-100" type="submit">Logout</button>
+    </form>
+
+    {% endwith %}
+  </div>
+</div>

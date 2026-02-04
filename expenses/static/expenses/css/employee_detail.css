@@ -1,0 +1,315 @@
+/* ======================================================
+   EMPLOYEE EXPENSE DETAIL — EXPENSES PAGE ONLY (TOKEN)
+   Same layout, dark-mode safe
+====================================================== */
+
+.inventory-wrapper {
+  max-width: 1200px;
+  margin: 30px auto 60px;
+  padding: 0 20px;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+.employee-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 35px;
+}
+
+.employee-header h2 {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* ======================================================
+   BUDGET BOX
+====================================================== */
+.budget-box {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary-100) 55%, var(--bg-card)),
+    var(--bg-card)
+  );
+  border: 3px solid color-mix(in srgb, var(--primary-500) 35%, var(--border-color));
+  border-radius: 20px;
+  padding: 22px 42px;
+  min-width: 260px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.budget-box span {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.budget-box strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+/* NEGATIVE STATE */
+.budget-box.budget-negative {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--danger-500, #dc2626) 16%, var(--bg-card)),
+    var(--bg-card)
+  );
+  border-color: color-mix(in srgb, var(--danger-500, #dc2626) 45%, var(--border-color));
+  box-shadow: var(--shadow-md);
+}
+
+.budget-box.budget-negative span {
+  color: var(--danger-500, #dc2626);
+}
+
+.budget-box.budget-negative strong {
+  color: var(--danger-500, #dc2626);
+}
+
+/* ======================================================
+   ACTION BUTTONS
+====================================================== */
+.page-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+  color: var(--text-inverse);
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--bg-muted);
+  color: var(--text-primary);
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  border: 1px solid var(--border-color);
+  transition: 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: color-mix(in srgb, var(--bg-muted) 70%, var(--bg-card));
+}
+
+.btn-light {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  border: 1px solid var(--border-color);
+}
+
+/* ======================================================
+   CONTENT CARD — CLEAN SAAS STYLE
+====================================================== */
+.content-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 22px 22px 18px;
+  margin-bottom: 28px;
+
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.content-card h3 {
+  position: relative;
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0 0 14px;
+  color: var(--text-primary);
+  text-align: center;
+  letter-spacing: -0.2px;
+}
+
+/* ======================================================
+   TABLE
+====================================================== */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  background: var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+
+  box-shadow: var(--shadow-sm);
+  table-layout: fixed;
+}
+
+.styled-table thead {
+  background: linear-gradient(135deg, var(--bg-muted), var(--bg-card));
+}
+
+.styled-table thead th {
+  padding: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.styled-table tbody td {
+  padding: 10px;
+  font-size: 15px;
+  color: var(--text-primary);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-color) 65%, transparent);
+  text-align: center;
+}
+
+.styled-table tbody tr:hover {
+  background: color-mix(in srgb, var(--primary-100) 35%, var(--bg-card));
+}
+
+.empty-row {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ======================================================
+   COLUMN WIDTHS
+   Date 20% | Amount 20% | Description 60%
+====================================================== */
+.styled-table th:nth-child(1),
+.styled-table td:nth-child(1) {
+  width: 20%;
+}
+
+.styled-table th:nth-child(2),
+.styled-table td:nth-child(2) {
+  width: 20%;
+}
+
+.styled-table th:nth-child(3),
+.styled-table td:nth-child(3) {
+  width: 60%;
+}
+
+/* ======================================================
+   AMOUNTS
+====================================================== */
+.amount-negative {
+  color: var(--danger-500, #dc2626) !important;
+  font-weight: 800;
+}
+
+.amount-positive {
+  color: var(--success-500, #16a34a) !important;
+  font-weight: 800;
+}
+
+.amount-black {
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* ======================================================
+   RESPONSIVE (keep your exact mobile widths)
+====================================================== */
+@media (max-width: 768px) {
+  .employee-header h2 {
+    font-size: 26px;
+  }
+
+  .budget-box {
+    padding: 18px 30px;
+  }
+
+  .budget-box strong {
+    font-size: 28px;
+  }
+
+  .content-card {
+    padding: 18px 14px 14px;
+    border-radius: 16px;
+  }
+
+  .content-card h3 {
+    font-size: 17px;
+  }
+
+  .styled-table {
+    table-layout: fixed;
+  }
+
+  /* ✅ mobile column widths: keep your behavior */
+  .styled-table th:nth-child(1),
+  .styled-table td:nth-child(1) {
+    width: 27%;
+  }
+
+  .styled-table th:nth-child(2),
+  .styled-table td:nth-child(2) {
+    width: 20%;
+  }
+
+  .styled-table th:nth-child(3),
+  .styled-table td:nth-child(3) {
+    width: 53%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .styled-table thead th,
+  .styled-table tbody td {
+    font-size: 13px;
+    padding: 8px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .styled-table tbody tr:hover {
+    background: inherit;
+  }
+
+  /* touch devices: avoid sticky hover on buttons */
+  .btn-primary:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+}

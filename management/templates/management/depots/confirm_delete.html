@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/depots.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">Fshi Magazinën</h2>
+
+  <div class="delete-box">
+    <p>A jeni i sigurt që dëshironi të fshini <strong>{{ depot.name }}</strong>?</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="page-actions center">
+        <button class="btn-danger" type="submit">Po, Fshi</button>
+        <a class="btn-secondary" href="{% url 'management:depot-detail' depot.pk %}">
+          Anulo
+        </a>
+      </div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,592 @@
+/* ======================================================
+   WITHDRAWAL FORM — 2 PANEL LAYOUT 
+====================================================== */
+
+.withdrawal-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 18px 70px;
+}
+
+/* Header */
+.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 18px 0 14px;
+  text-align: center;
+}
+
+.page-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary-500);
+  margin: 0;
+}
+
+/* Cards */
+.panel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Error */
+.error-card {
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(254, 242, 242, 0.9);
+  color: #991b1b;
+  margin: 10px auto 14px;
+  max-width: 900px;
+}
+
+/* 2-column */
+.withdrawal-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Right title */
+.right-title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+/* ======================================================
+   DESKTOP BEHAVIOR:
+   LEFT LOCKED (STICKY) + LEFT INTERNAL SCROLL
+====================================================== */
+
+.left-panel {
+  position: sticky;
+  top: 84px;
+  height: calc(100vh - 110px);
+  overflow: hidden;
+}
+
+.left-panel .panel-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-panel .search-bar {
+  flex: 0 0 auto;
+}
+
+.left-panel .table-wrapper {
+  flex: 1 1 auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.right-panel {
+  min-height: 1px;
+}
+
+/* ======================================================
+   LEFT SIDE — TABLE
+====================================================== */
+
+.search-bar {
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.search-bar::before {
+  content: "🔍";
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 48px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  font-size: 15px;
+  color: var(--text-primary);
+  transition: 0.25s ease;
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+/* table wrapper (glass-ish) */
+.table-wrapper {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.styled-table thead th {
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.15s ease;
+}
+
+.styled-table tbody tr:hover {
+  background: var(--bg-page);
+}
+
+.styled-table td {
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.styled-table th,
+.styled-table td {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+/* columns */
+.styled-table th:nth-child(1),
+.styled-table td:nth-child(1) { width: 62%; }
+
+.styled-table th:nth-child(2),
+.styled-table td:nth-child(2) { width: 30%; }
+
+.styled-table th:nth-child(3),
+.styled-table td:nth-child(3) {
+  width: 10%;
+  text-align: right;
+}
+
+.th-add { text-align: center !important; }
+
+.no-results {
+  padding: 18px;
+  font-size: 15px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.p-name {
+  font-weight: 750;
+  color: var(--text-primary);
+}
+
+.p-meta {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.p-stock {
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* + button */
+.btn-add-mini {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  background: rgba(37, 99, 235, 0.10);
+  color: var(--primary-600);
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.btn-add-mini:hover {
+  transform: translateY(-1px);
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.btn-add-mini:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ======================================================
+   RIGHT SIDE — FORM
+====================================================== */
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.notes-box textarea,
+.notes-box input,
+.notes-box select,
+.notes-box {
+  width: 100%;
+}
+
+.notes-box textarea {
+  width: 100%;
+  min-height: 48px;
+  max-height: 120px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  padding: 10px 12px;
+  font-size: 14px;
+  resize: vertical;
+  box-sizing: border-box;
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.items-box {
+  margin-top: 12px;
+  border: 1px dashed var(--border-color);
+  border-radius: 14px;
+  padding: 10px;
+
+  /* was rgba(248,250,252,0.7) (light-only) */
+  background: var(--bg-muted);
+}
+
+.items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.items-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  margin-bottom: 8px;
+}
+
+.items-list li strong {
+  display: block;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.item-depot {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.right-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.qty-display {
+  font-weight: 950;
+  color: var(--text-primary);
+}
+
+.unit-display {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+.icon-btn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  transition: 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: var(--bg-muted);
+}
+
+/* Submit */
+.submit-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 0;
+  background: var(--primary-600);
+  color: white;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+/* Buttons used in modal footer */
+.btn-light {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.btn-primary {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 0;
+  background: var(--primary-600);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+/* ======================================================
+   MODAL
+====================================================== */
+
+.qty-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 3000;
+}
+
+.qty-modal.active { display: block; }
+
+.qty-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.qty-modal__dialog {
+  position: relative;
+  width: min(420px, calc(100% - 24px));
+  margin: 8vh auto 0;
+
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+
+  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.22);
+  overflow: hidden;
+}
+
+.qty-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.qty-modal__title {
+  font-size: 16px;
+  font-weight: 950;
+  color: var(--text-primary);
+}
+
+.qty-modal__sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.qty-modal__close {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+.qty-modal__close:hover { background: var(--bg-muted); }
+
+.qty-modal__body { padding: 14px 16px 6px; }
+
+.qty-row label {
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.qty-row input {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  font-size: 15px;
+  box-sizing: border-box;
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.qty-row input:focus {
+  outline: none;
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+.qty-hint {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.qty-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ======================================================
+   DARK MODE — glass wrapper correction
+   (ONLY for glass surfaces)
+====================================================== */
+:root[data-theme="dark"] .table-wrapper {
+  background: rgba(15, 26, 43, 0.72);
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .styled-table tbody tr:hover {
+  background: rgba(76, 141, 255, 0.10);
+}
+
+/* ======================================================
+   MOBILE (Form on top, table below)
+====================================================== */
+@media (max-width: 992px) {
+  .withdrawal-layout { grid-template-columns: 1fr; }
+
+  .right-panel { order: 1; }
+
+  .left-panel {
+    order: 2;
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .left-panel .panel-card {
+    height: auto;
+    display: block;
+  }
+
+  .left-panel .table-wrapper { overflow: visible; }
+
+  .styled-table td:nth-child(3),
+  .styled-table th:nth-child(3){
+    text-align: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .styled-table td:nth-child(3) .btn-add-mini{
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* ======================================================
+   DARK MODE FIX — FORCE RIGHT FORM FIELDS TO USE TOKENS
+   (Operatori + Date were staying white)
+====================================================== */
+:root[data-theme="dark"] .right-panel input,
+:root[data-theme="dark"] .right-panel select,
+:root[data-theme="dark"] .right-panel textarea,
+:root[data-theme="dark"] .right-panel .form-control {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+:root[data-theme="dark"] .right-panel input::placeholder,
+:root[data-theme="dark"] .right-panel textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* Date picker icon (Chrome/Safari) */
+:root[data-theme="dark"] .right-panel input[type="date"] {
+  color-scheme: dark; /* helps the calendar popup too */
+}
+
+/* If you use any readonly fields */
+:root[data-theme="dark"] .right-panel input[readonly] {
+  background: var(--bg-muted) !important;
+}
+
+
+
+/* ======================================================
+   MOBILE — SHORTER NOTES BOX
+====================================================== */
+@media (max-width: 768px) {
+  .notes-box textarea {
+    min-height: 36px;   /* shorter than desktop */
+    max-height: 80px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-box textarea {
+    min-height: 32px;
+    max-height: 64px;
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+}

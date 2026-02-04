@@ -1,0 +1,103 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %}Për tu Rikthyer - Sipas Punonjësit{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/employees.css' %}">
+{% endblock %}
+
+{% block body %}
+
+
+<div class="employee-container">
+  <!-- LEFT SIDEBAR -->
+  <div class="employee-sidebar">
+    <h4>Punonjësi</h4>
+
+    <div class="employee-list">
+      {% for emp in employees %}
+      {% if emp.is_active %}
+      <a
+        href="{% url 'inventory:employee-detail' emp.id %}"
+        class="employee-list-item {% if selected_employee and emp.id == selected_employee.id %}active{% endif %}"
+      >
+        {{ emp.name }}
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- RIGHT CONTENT -->
+  <div class="employee-content">
+    {% if not selected_employee %}
+    <div class="empty-state">
+      <h4>
+        Lista e Materialeve Të Rikthueshme - Sipas Punonjësit Përgjegjes Për To
+      </h4>
+      <p>Zgjidh Një Nga Punonjësit</p>
+    </div>
+
+    {% else %}
+
+    <div class="employee-header">
+      <h3>{{ selected_employee.name }}</h3>
+      <p>
+        {{ selected_employee.position }}
+        <span style="margin-left: 70px"
+          >Tel: {{ selected_employee.phone }}</span
+        >
+      </p>
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Materiali</th>
+          <th>Sasia</th>
+          <th>Data</th>
+          <th>Kthe</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for w in withdrawals %}
+        <tr class="click-row" data-url="{% url 'inventory:withdraw-detail' w.id %}">
+          <td><strong>{{ w.product.name }}</strong></td>
+          <td>{{ w.outstanding_qty }}</td>
+          <td>{{ w.header.date }}</td>
+          <td>
+            <a href="{% url 'inventory:return-item' w.id %}" class="return-btn"
+              >⏎</a
+            >
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="empty-row">Nuk ka Materiale për te rikthyer</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% endif %}
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".click-row").forEach(row => {
+    row.style.cursor = "pointer";
+    row.addEventListener("click", function(e) {
+      
+      // Prevent clicking the Return button from triggering the row link
+      if (e.target.closest("a")) return;
+
+      window.location.href = this.dataset.url;
+    });
+  });
+});
+</script>
+
+{% endblock %}

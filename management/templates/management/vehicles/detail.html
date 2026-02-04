@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/vehicles.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">{{ vehicle.plate }}</h2>
+
+  <div class="detail-card">
+    <h3>Detajet e Automjetit</h3>
+
+    <ul class="detail-list">
+      <li><strong>Targa</strong> <span>{{ vehicle.plate }}</span></li>
+      <li><strong>Shasia</strong> <span>{{ vehicle.chassis }}</span></li>
+      <li><strong>Përshkrimi</strong> <span>{{ vehicle.description }}</span></li>
+
+      <li><strong>Siguracioni</strong> <span>{{ vehicle.insurance|date:"d/m/Y" }}</span></li>
+      <li><strong>Taksat Vjetore</strong> <span>{{ vehicle.yearly_taxes|date:"d/m/Y" }}</span></li>
+      <li><strong>Kolaudimi Periodik</strong> <span>{{ vehicle.periodic_inspection|date:"d/m/Y" }}</span></li>
+
+      <li><strong>Taksë Bashkie</strong> <span>{{ vehicle.municipal_tax|date:"d/m/Y"|default:"—" }}</span></li>
+      <li><strong>Tachograph</strong> <span>{{ vehicle.tachograph|date:"d/m/Y"|default:"—" }}</span></li>
+
+      <li><strong>Aktiv</strong> <span>{% if vehicle.is_active %}Po{% else %}Jo{% endif %}</span></li>
+    </ul>
+
+    <div class="detail-actions">
+      <a class="btn-primary" href="{% url 'management:vehicle-edit' vehicle.pk %}">Edit</a>
+      <a class="btn-danger" href="{% url 'management:vehicle-delete' vehicle.pk %}">Delete</a>
+      <a class="btn-secondary" href="{% url 'management:vehicle-list' %}">← Back</a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

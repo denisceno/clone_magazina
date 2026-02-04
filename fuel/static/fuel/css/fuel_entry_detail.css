@@ -1,0 +1,286 @@
+/* ======================================================
+   CARD WRAPPER
+====================================================== */
+.fuel-card {
+  width: 85%;
+  margin: 20px auto;
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-md);
+}
+
+/* ======================================================
+   SECTION TITLES
+====================================================== */
+.section-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+}
+
+/* ======================================================
+   DATE DISPLAY
+====================================================== */
+.entry-date {
+  text-align: center;
+  font-weight: 800;
+  font-size: 60px;
+  color: var(--primary-500);
+  margin: 0 0 25px 0;
+  letter-spacing: -1px;
+}
+
+/* ======================================================
+   ENTRY INFO LINE
+====================================================== */
+.entry-info-line {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.entry-info-line span strong {
+  color: var(--text-primary);
+}
+
+/* ======================================================
+   VEHICLE REPORT CARDS
+====================================================== */
+.vehicle-report-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin: 30px 0;
+}
+
+.vehicle-card {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--bg-card) 92%, var(--primary-100)),
+    var(--bg-muted)
+  );
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: 0.25s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.vehicle-card h4 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-500);
+}
+
+.vehicle-card p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+/* ======================================================
+   TABLE
+====================================================== */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.modern-table thead {
+  background: linear-gradient(
+    135deg,
+    var(--primary-500),
+    var(--primary-600)
+  );
+  color: var(--text-inverse);
+}
+
+.modern-table thead th {
+  padding: 14px 10px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.modern-table tbody td {
+  text-align: center;
+  padding: 12px 8px;
+  font-size: 15px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modern-table tbody tr {
+  transition: 0.2s ease;
+}
+
+.modern-table tbody tr:nth-child(even) {
+  background: var(--bg-muted);
+}
+
+.modern-table tbody tr:hover {
+  background: color-mix(
+    in srgb,
+    var(--primary-100) 35%,
+    var(--bg-card)
+  );
+}
+
+/* round last row edges */
+.modern-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+
+.modern-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+/* ======================================================
+   NO USAGE MESSAGE
+====================================================== */
+.no-usage {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* ======================================================
+   BUTTON
+====================================================== */
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  background: var(--primary-500);
+  color: var(--text-inverse);
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.button:hover {
+  background: var(--primary-600);
+}
+
+/* back button wrapper */
+.page-back {
+  text-align: center;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+/* ======================================================
+   MOBILE
+====================================================== */
+@media (max-width: 768px) {
+  .fuel-card {
+    width: auto;
+    margin: 16px 14px;
+    padding: 22px 18px;
+  }
+
+  .entry-date {
+    font-size: 36px;
+    margin-bottom: 18px;
+    line-height: 1.1;
+  }
+
+  .entry-info-line {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .vehicle-report-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .vehicle-card {
+    padding: 18px;
+  }
+
+  .vehicle-card h4 {
+    font-size: 20px;
+  }
+
+  .vehicle-card p {
+    font-size: 14px;
+  }
+
+  .vehicle-card:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+
+  .table-wrapper {
+    margin-top: 16px;
+  }
+
+  .modern-table {
+    min-width: 680px;
+  }
+
+  .modern-table thead th,
+  .modern-table tbody td {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+
+  .modern-table tbody tr:hover {
+    background: inherit;
+  }
+
+  .button {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .button:hover {
+    background: var(--primary-500);
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .no-usage {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .entry-date {
+    font-size: 32px;
+  }
+
+  .modern-table {
+    min-width: 620px;
+  }
+}

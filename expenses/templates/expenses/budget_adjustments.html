@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Financimet ({{ employee.name }}){% endblock%}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'expenses/css/budget_adjustments.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="inventory-wrapper">
+
+  <!-- HEADER -->
+  <div class="employee-header">
+    <h2>{{ employee.name }}</h2>
+    <div class="budget-box {% if budget.balance < 0 %}budget-negative{% endif %}">
+      <span>Balanca</span>
+      <strong>{{ budget.balance }}</strong>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="page-actions">
+    <a class="btn-light" href="{% url 'expenses:expenses-employee-detail' employee.id %}">← Kthehu tek Shpenzimet</a>
+  </div>
+
+  <!-- ADJUSTMENTS -->
+  <div class="content-card">
+    <h3>Financimet</h3>
+
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Shuma</th>
+            <th>Shënime</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in adjustments %}
+            <tr>
+              <td>{{ a.date|date:"d.m.Y" }}</td>
+                <td class="{% if a.adjustment_type == 'REMOVE' %}amount-negative{% else %}amount-positive{% endif %}">
+                {% if a.adjustment_type == 'REMOVE' %}
+                    −{{ a.amount }}
+                {% else %}
+                    {{ a.amount }}
+                {% endif %}
+                </td>
+              <td>{{ a.note|default:"—" }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4" class="empty-row">Nuk ka lëvizje</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/depots.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">{{ depot.name }}</h2>
+
+  <div class="detail-card">
+    <h3>Detajet e Magazinës</h3>
+
+    <ul class="detail-list">
+      <li>
+        <strong>Emri</strong>
+        <span>{{ depot.name }}</span>
+      </li>
+
+      <li>
+        <strong>Përshkrimi</strong>
+        <span>{{ depot.description|default:"—" }}</span>
+      </li>
+    </ul>
+
+    <div class="detail-actions">
+      <a class="btn-primary" href="{% url 'management:depot-edit' depot.pk %}">
+        Edit
+      </a>
+
+      <a class="btn-danger" href="{% url 'management:depot-delete' depot.pk %}">
+        Delete
+      </a>
+
+      <a class="btn-secondary" href="{% url 'management:depot-list' %}">
+        ← Back
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

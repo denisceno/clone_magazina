@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/employees.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">{{ employee.name }}</h2>
+
+  <div class="detail-card">
+    <h3>Detajet e Punonjësit</h3>
+
+    <ul class="detail-list">
+      <li><strong>Emri</strong> <span>{{ employee.name }}</span></li>
+      <li><strong>Pozicioni</strong> <span>{{ employee.position }}</span></li>
+      <li><strong>Telefoni</strong> <span>{{ employee.phone|default:"—" }}</span></li>
+      <li><strong>Ka Buxhet</strong> <span>{% if employee.have_budget %}Po{% else %}Jo{% endif %}</span></li>
+      <li><strong>Aktiv</strong> <span>{% if employee.is_active %}Po{% else %}Jo{% endif %}</span></li>
+      <li><strong>User</strong> <span>{{ employee.user|default:"—" }}</span></li>
+    </ul>
+
+    <div class="detail-actions">
+      <a class="btn-primary" href="{% url 'management:employee-edit' employee.pk %}">Edit</a>
+      <a class="btn-danger" href="{% url 'management:employee-delete' employee.pk %}">Delete</a>
+      <a class="btn-secondary" href="{% url 'management:employee-list' %}">← Back</a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

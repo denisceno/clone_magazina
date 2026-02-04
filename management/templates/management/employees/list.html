@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/employees.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">Personeli</h2>
+
+  <div class="inventory-grid">
+    {% for e in employees %}
+      <a href="{% url 'management:employee-detail' e.pk %}" class="inventory-card">
+        <h3>{{ e.name }}</h3>
+        <p>{{ e.position }}</p>
+
+        {% if e.is_active %}
+          <div class="badge badge-active">Aktiv</div>
+        {% else %}
+          <div class="badge badge-inactive">Jo Aktiv</div>
+        {% endif %}
+      </a>
+    {% empty %}
+      <p>Nuk ka punonjës.</p>
+    {% endfor %}
+  </div>
+
+  <div class="page-actions center">
+    <a class="btn-primary" href="{% url 'management:employee-create' %}">+ Shto Punonjës</a>
+    <a class="btn-secondary" href="{% url 'management:dashboard' %}">← Management</a>
+  </div>
+
+</div>
+{% endblock %}

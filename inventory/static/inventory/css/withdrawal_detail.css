@@ -1,0 +1,155 @@
+/* ======================================================
+   WITHDRAWAL DETAIL — withdrawal_detail.css
+   Smooth + compact (same system as your other pages)
+====================================================== */
+
+/* Safety: prevent mobile side overflow */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ======================================================
+   PAGE WRAPPER
+====================================================== */
+.detail-wrap {
+  max-width: 620px;
+  margin: 34px auto;
+  padding: 0 16px;
+}
+
+/* Title */
+.detail-title {
+  margin: 0 0 16px;
+  text-align: center;
+
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+/* ======================================================
+   CARD
+====================================================== */
+.detail-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 12px 32px rgba(17, 24, 39, 0.08);
+}
+
+/* Lines inside the card */
+.detail-card p {
+  margin: 10px 0;
+  font-size: 15px;
+  line-height: 1.35;
+  color: #111827; /* keep exact readable tone */
+}
+
+.detail-card p strong {
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* quantity */
+.qty-blue {
+  color: var(--primary-600);
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/* ======================================================
+   NOTES
+====================================================== */
+.notes-block {
+  margin-top: 14px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.notes-block strong {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.notes-box {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(13, 90, 245, 0.14);
+  background: rgba(13, 90, 245, 0.05);
+  color: #111827;
+  line-height: 1.45;
+
+  /* prevents super long words from causing overflow */
+  overflow-wrap: anywhere;
+}
+
+/* ======================================================
+   BACK LINK
+====================================================== */
+.back-link {
+  display: block;
+  margin-top: 18px;
+  text-align: center;
+
+  text-decoration: none;
+  font-weight: 800;
+  color: var(--primary-600);
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.back-link:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* ======================================================
+   DARK MODE — keep glass look readable
+====================================================== */
+:root[data-theme="dark"] .detail-card {
+  background: rgba(15, 26, 43, 0.92);
+  border-color: var(--border-color);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme="dark"] .detail-card p,
+:root[data-theme="dark"] .notes-block,
+:root[data-theme="dark"] .notes-box {
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .notes-box {
+  background: rgba(76, 141, 255, 0.12);
+  border-color: rgba(76, 141, 255, 0.25);
+}
+
+/* ======================================================
+   MOBILE
+====================================================== */
+@media (max-width: 768px) {
+  .detail-wrap {
+    margin: 22px auto;
+  }
+
+  .detail-title {
+    font-size: 20px;
+  }
+
+  .detail-card {
+    padding: 18px 16px 16px;
+  }
+
+  .qty-blue {
+    font-size: 17px;
+  }
+}

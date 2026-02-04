@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/employees.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">
+    {% if employee %}Edit Punonjës{% else %}Shto Punonjës{% endif %}
+  </h2>
+
+  <div class="form-card">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="form-actions">
+        <button class="btn-primary" type="submit">Ruaj</button>
+        <a class="btn-secondary" href="{% url 'management:employee-list' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

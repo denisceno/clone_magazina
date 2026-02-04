@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Shto Sasinë “{{ product.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/add_quantity.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="form-card">
+    <h3>Shto Sasinë “{{ product.name }}”</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-fields">
+            {{ form.as_p }}
+
+            <button type="submit" class="form-submit">
+                Shto Sasinë
+            </button>
+        </div>
+    </form>
+
+    <div class="form-actions">
+        <a href="{% url 'inventory:product-detail' product.id %}" class="form-cancel">
+            Anullo Veprimin
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

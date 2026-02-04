@@ -1,0 +1,218 @@
+/* ======================================================
+   RETURN ITEM — return_item.css
+   Smooth + compact card
+====================================================== */
+
+/* Safety: prevent mobile side overflow */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ======================================================
+   CARD
+====================================================== */
+.form-card {
+  max-width: 620px;
+  margin: 34px auto;
+  padding: 26px 26px 22px;
+
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(17, 24, 39, 0.08);
+}
+
+.form-card h3 {
+  margin: 0 0 18px;
+  text-align: center;
+
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+/* ======================================================
+   LAYOUT
+====================================================== */
+.form-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+/* utility */
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Info lines (no pill / no box) */
+.form-fields > p.full-width {
+  margin: 0;
+  padding: 6px 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+
+  color: #111827; /* keep exact tone */
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.form-fields > p.full-width strong {
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* qty highlight */
+.rikthyer-qty {
+  color: var(--primary-600);
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/* ======================================================
+   ERROR (your template uses <p class="full-width errorlist">)
+====================================================== */
+.errorlist {
+  margin: 6px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  color: #b91c1c;
+  font-weight: 800;
+}
+
+/* ======================================================
+   FORM CONTROLS
+====================================================== */
+form.full-width {
+  margin: 8px 0 0;
+}
+
+form.full-width p.full-width {
+  margin: 0; /* remove default <p> margins */
+}
+
+/* Label */
+form label {
+  display: block;
+  margin: 10px 0 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Number input (bold + blue) */
+form input[type="number"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(13, 90, 245, 0.25);
+  background: var(--bg-card);
+
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--primary-600);
+
+  outline: none;
+  box-shadow: 0 6px 18px rgba(13, 90, 245, 0.08);
+  transition: border 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+form input[type="number"]:focus {
+  border-color: rgba(13, 90, 245, 0.65);
+  box-shadow: 0 0 0 4px rgba(59, 126, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+/* (optional) spinner visibility control */
+form input[type="number"]::-webkit-inner-spin-button,
+form input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.7;
+}
+
+/* ======================================================
+   SUBMIT BUTTON
+====================================================== */
+.form-submit {
+  width: 70%;
+  margin: 16px auto 0;
+  display: block;
+
+  padding: 14px 16px;
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(13, 90, 245, 0.22);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(13, 90, 245, 0.28);
+  filter: brightness(1.02);
+}
+
+.form-submit:active {
+  transform: translateY(0);
+}
+
+/* ======================================================
+   DARK MODE — keep card readable
+====================================================== */
+:root[data-theme="dark"] .form-card {
+  background: rgba(15, 26, 43, 0.92); /* matches your dark card vibe */
+  border-color: var(--border-color);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme="dark"] .form-fields > p.full-width {
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] form input[type="number"] {
+  border-color: rgba(76, 141, 255, 0.35);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ======================================================
+   MOBILE
+====================================================== */
+@media (max-width: 768px) {
+  .form-card {
+    max-width: 92%;
+    margin: 22px auto;
+    padding: 20px 16px 18px;
+  }
+
+  .form-card h3 {
+    font-size: 20px;
+  }
+
+  .form-submit {
+    width: 100%;
+  }
+
+  /* prevent iOS zoom */
+  form input[type="number"] {
+    font-size: 16px;
+  }
+}

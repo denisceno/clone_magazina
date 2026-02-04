@@ -1,0 +1,48 @@
+/* ======================================================
+   ADD QUANTITY — Page-specific overrides
+   Base styles loaded from: /static/css/forms.css
+====================================================== */
+
+/* Narrower card for single-field form */
+.form-card {
+  max-width: 720px;
+  padding: 32px;
+}
+
+.form-card h3 {
+  font-size: 24px;
+  margin-bottom: 22px;
+}
+
+/* Single column layout for this form */
+.form-fields {
+  display: block;
+}
+
+.form-fields p {
+  margin: 0 0 18px 0;
+}
+
+/* Input height adjustment */
+.form-fields input,
+.form-fields select {
+  height: 56px;
+}
+
+/* Full-width submit */
+.form-submit {
+  width: 100%;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .form-card h3 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .form-fields input,
+  .form-fields select {
+    height: 54px;
+  }
+}

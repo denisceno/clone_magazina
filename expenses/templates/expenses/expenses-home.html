@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Shpenzimet{% endblock%}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'expenses/css/expenses-home.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">Buxhetet</h2>
+
+  <div class="inventory-grid">
+
+{% for e in employees %}
+<a href="{% url 'expenses:expenses-employee-detail' e.id %}"
+   class="inventory-card
+          {% if e.balance < 0 %}
+            card-negative
+          {% elif e.balance > 0 %}
+            card-positive
+          {% endif %}">
+
+
+    <h3>{{ e.name }}</h3>
+
+<p>
+  Balanca:
+  <strong class="{% if e.balance < 0 %}amount-negative{% elif e.balance > 0 %}amount-positive{% endif %}">
+    {{ e.balance|default:"0.00" }}
+  </strong>
+</p>
+
+  </a>
+{% empty %}
+  <p>No employees.</p>
+{% endfor %}
+
+
+  </div>
+
+  <div class="page-actions">
+    <a class="btn-primary" href="{% url 'expenses:expenses-adjust-budget' %}">Shto/Zbrit Buxhetin</a>
+  </div>
+
+</div>
+
+{% endblock %}

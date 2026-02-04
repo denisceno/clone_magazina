@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Modifiko {{ product.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/edit_product.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="form-card">
+    <h3>Modifiko {{ product.name }}</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-fields">
+            {{ form.as_p }}
+
+            <button type="submit" class="form-submit">
+                Ruaj Ndryshimet
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

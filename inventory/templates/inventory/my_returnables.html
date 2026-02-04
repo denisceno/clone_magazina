@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Materialet e Mia për Rikthim{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/employees.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="employee-container" style="display:block; height:auto;">
+  <div class="employee-content" style="margin-left:0;">
+
+    <div class="employee-header">
+      <h3>{{ selected_employee.name }}</h3>
+      <p>
+        {{ selected_employee.position }}
+        <span style="margin-left: 70px">Tel: {{ selected_employee.phone }}</span>
+      </p>
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Materiali</th>
+          <th>Sasia</th>
+          <th>Data</th>
+          <th>Kthe</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for w in withdrawals %}
+        <tr>
+          <td><strong>{{ w.product.name }}</strong></td>
+          <td>{{ w.outstanding_calc }}</td>
+          <td>{{ w.header.date }}</td>
+          <td>
+            {% widthratio w.product.price 1 w.outstanding_calc %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="empty-row">Nuk ke materiale për rikthim.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".click-row").forEach(row => {
+    row.style.cursor = "pointer";
+    row.addEventListener("click", function(e) {
+      if (e.target.closest("a")) return;
+      window.location.href = this.dataset.url;
+    });
+  });
+});
+</script>
+
+{% endblock %}

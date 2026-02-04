@@ -1,0 +1,156 @@
+/* ======================================================
+   AUDIT DASHBOARD — OPTION B (CARD MOBILE)
+   Token-based, DARK MODE CORRECT, no layout changes
+====================================================== */
+
+.container {
+  max-width: 1400px;
+}
+
+/* Title */
+.container h2 {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+/* ======================================================
+   FILTERS
+   Keep same spacing/layout, just theme-safe colors
+====================================================== */
+form.mb-3 {
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-muted));
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  gap: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Bootstrap-safe select theming */
+form.mb-3 .form-select,
+form.mb-3 select {
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 700;
+
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+form.mb-3 .form-select:focus,
+form.mb-3 select:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary-100) 70%, transparent);
+}
+
+/* ======================================================
+   TABLE — Desktop
+   IMPORTANT: override Bootstrap .table variables here
+====================================================== */
+.audit-table {
+  /* Bootstrap table vars */
+  --bs-table-bg: var(--bg-card);
+  --bs-table-color: var(--text-primary);
+  --bs-table-border-color: var(--border-color);
+  --bs-table-hover-bg: color-mix(in srgb, var(--primary-100) 35%, var(--bg-card));
+  --bs-table-hover-color: var(--text-primary);
+
+  background: var(--bg-card);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.audit-table thead th {
+  background: linear-gradient(180deg, var(--bg-muted), var(--bg-card));
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.audit-table td {
+  padding: 12px;
+  vertical-align: middle;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Description column */
+.audit-table td:nth-child(5) {
+  max-width: 520px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+/* Badge shape (keep your Bootstrap bg-* colors from template) */
+.badge {
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* ======================================================
+   MOBILE — CARD STYLE (same behavior as Option B)
+====================================================== */
+@media (max-width: 992px) {
+
+  form.mb-3 {
+    flex-direction: column;
+  }
+
+  .audit-table thead {
+    display: none;
+  }
+
+  .audit-table,
+  .audit-table tbody,
+  .audit-table tr,
+  .audit-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .audit-table tbody tr {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .audit-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 8px 0;
+    border: none;
+  }
+
+  .audit-table td::before {
+    content: attr(data-label);
+    font-weight: 900;
+    color: var(--text-muted);
+    flex: 0 0 120px;
+  }
+
+  .audit-table td:nth-child(5) {
+    line-height: 1.4;
+  }
+
+  /* touch: avoid sticky hover */
+  .audit-table tbody tr:hover {
+    background: inherit;
+  }
+}

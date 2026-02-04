@@ -1,0 +1,178 @@
+/* ======================================================
+   FUEL — FORM CARD (TOKEN-BASED, DARK MODE READY)
+   NOTE: avoid styling body here — use page wrapper
+====================================================== */
+
+/* Page wrapper (add class="fuel-page" on the template wrapper) */
+.fuel-page {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  padding: 1px 0; /* keeps margins behaving nicely */
+}
+
+/* ================================
+   FORM CARD
+================================ */
+.form-card {
+  width: 450px;
+  margin: 40px auto;
+  padding: 30px;
+
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+
+  text-align: center;
+}
+
+.form-card h2 {
+  margin-bottom: 20px;
+  color: var(--primary-500);
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* Django form output (form.as_p) */
+.form-card p {
+  margin: 0 0 12px 0;
+  text-align: left;
+}
+
+.form-card label {
+  display: block;
+  font-weight: 700;
+  margin-top: 10px;
+  color: var(--text-secondary);
+}
+
+/* inputs/selects/textarea */
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+
+  background: var(--bg-card);
+  color: var(--text-primary);
+
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-card input::placeholder,
+.form-card textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+  border-color: color-mix(in srgb, var(--primary-500) 70%, var(--border-color));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary-100) 70%, transparent);
+}
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+.button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+
+  background: var(--primary-500);
+  color: var(--text-inverse);
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: var(--primary-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* back link */
+.form-card a {
+  color: var(--primary-500);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.form-card a:hover {
+  text-decoration: underline;
+}
+
+.form-back {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* ================================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+  .form-card {
+    width: auto;
+    margin: 20px 14px;
+    padding: 22px 18px;
+    border-radius: 14px;
+  }
+
+  .form-card h2 {
+    font-size: 22px;
+  }
+
+  .form-card input,
+  .form-card select,
+  .form-card textarea,
+  .button {
+    font-size: 16px; /* prevents iOS zoom */
+  }
+
+  .form-card input,
+  .form-card select,
+  .form-card textarea {
+    padding: 12px;
+  }
+
+  .button {
+    padding: 14px;
+  }
+
+  /* hover shouldn't "stick" on touch */
+  .button:hover {
+    background: var(--primary-500);
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    margin: 16px 12px;
+    padding: 20px 16px;
+  }
+
+  .form-card h2 {
+    font-size: 20px;
+  }
+}

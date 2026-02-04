@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/vehicles.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">Automjetet</h2>
+
+  <div class="inventory-grid">
+    {% for v in vehicles %}
+      <a href="{% url 'management:vehicle-detail' v.pk %}" class="inventory-card">
+        <h3>{{ v.plate }}</h3>
+        <p>{{ v.description }}</p>
+
+        <div class="card-meta">
+          <div class="meta-row">
+            <strong>Siguracioni</strong>
+            <span>{{ v.insurance|date:"d/m/Y" }}</span>
+          </div>
+          <div class="meta-row">
+            <strong>Kolaudimi</strong>
+            <span>{{ v.periodic_inspection|date:"d/m/Y" }}</span>
+          </div>
+          <div class="meta-row">
+            <strong>Kolaudimi</strong>
+            <span>{{ v.yearly_taxes|date:"d/m/Y" }}</span>
+          </div>
+        </div>
+
+        {% if v.is_active %}
+          <div class="badge badge-active">Aktiv</div>
+        {% else %}
+          <div class="badge badge-inactive">Jo Aktiv</div>
+        {% endif %}
+      </a>
+    {% empty %}
+      <p>Nuk ka automjete.</p>
+    {% endfor %}
+  </div>
+
+  <div class="page-actions center">
+    <a class="btn-primary" href="{% url 'management:vehicle-create' %}">+ Shto Automjet</a>
+    <a class="btn-secondary" href="{% url 'management:dashboard' %}">← Management</a>
+  </div>
+
+</div>
+{% endblock %}

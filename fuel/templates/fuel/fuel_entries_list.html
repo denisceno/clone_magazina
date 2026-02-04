@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Furnizimet {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fuel/css/fuel_entries_list.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<h2 class="page-title">Furnizimet e Depozitës</h2>
+
+<table class="entries-table">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Depozita</th>
+      <th>Sasia (L)</th>
+      <th>Furnizuesi</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for e in entries %}
+      <tr class="click-row" onclick="window.location.href='/fuel/furnizimi/{{ e.id }}/'">
+        <td>{{ e.date|date:"d/m/Y" }}</td>
+        <td>{{ e.tank.name }}</td>
+        <td><strong>{{ e.amount }}</strong></td>
+        <td>{{ e.supplier|default:"—" }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="4" class="empty-row">Nuk ka furnizime të regjistruara.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

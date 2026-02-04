@@ -1,0 +1,141 @@
+/* ===========================
+   PAGE TITLE
+=========================== */
+.page-title {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--text-primary);
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+/* ===========================
+   ENTRIES TABLE
+=========================== */
+.entries-table {
+  width: 90%;
+  margin: 40px auto;
+  border-collapse: collapse;
+
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.entries-table thead {
+  background: var(--primary-500);
+  color: var(--text-inverse);
+  font-weight: 800;
+}
+
+.entries-table th,
+.entries-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.entries-table thead th {
+  color: var(--text-inverse);
+}
+
+/* clickable rows */
+.entries-table .click-row {
+  cursor: pointer;
+}
+
+.entries-table .click-row:hover {
+  background: color-mix(
+    in srgb,
+    var(--primary-100) 45%,
+    var(--bg-card)
+  );
+}
+
+/* empty state */
+.entries-table .empty-row {
+  text-align: center;
+  padding: 22px 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ===========================
+   BACK BUTTON
+=========================== */
+.page-back {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  background: var(--primary-500);
+  color: var(--text-inverse);
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: var(--primary-600);
+}
+
+/* ===========================
+   MOBILE — FIT TABLE TO SCREEN
+=========================== */
+@media (max-width: 768px) {
+  .entries-table {
+    width: 100%;
+    margin: 20px 0;
+
+    display: table;
+    table-layout: fixed;
+    white-space: normal;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  .entries-table th,
+  .entries-table td {
+    font-size: 13px;
+    padding: 10px 8px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  .entries-table tbody tr:hover {
+    background: inherit;
+  }
+
+  .button {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .button:hover {
+    background: var(--primary-500);
+  }
+}
+
+/* SMALL PHONES */
+@media (max-width: 480px) {
+  .entries-table th,
+  .entries-table td {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}

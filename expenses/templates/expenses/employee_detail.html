@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ employee.name }}{% endblock%}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'expenses/css/employee_detail.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="inventory-wrapper">
+
+  <!-- HEADER -->
+  <div class="employee-header">
+    <h2>{{ employee.name }}</h2>
+    <div class="budget-box {% if budget.balance < 0 %}budget-negative{% endif %}">
+      <span>Balanca</span>
+      <strong>{{ budget.balance }}</strong>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="page-actions">
+    {% if can_add_expense %}
+  <a class="btn-primary" href="{% url 'expenses:expenses-add-expense' %}">
+    Regjistro Shpenzim
+  </a>
+{% endif %}
+
+
+    <a class="btn-secondary" href="{% url 'expenses:expenses-budget-adjustments' employee.id %}">
+      Financimet →
+    </a>
+  </div>
+
+  <!-- EXPENSES -->
+  <div class="content-card">
+    <h3>Shpenzimet</h3>
+
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Shuma</th>
+            <th>Përshkrimi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in expenses %}
+            <tr>
+              <td>{{ x.date|date:"d.m.Y" }}</td>
+              <td class="amount-black">{{ x.amount }}</td>
+              <td>{{ x.description }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3" class="empty-row">Nuk ka Shpenzime</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

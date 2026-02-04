@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}404 - Faqja nuk u gjet{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/errors.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="error403-wrapper">
+  <div class="error403-card">
+    <div class="error403-code">404</div>
+    <h2 class="error403-title">Faqja nuk u gjet</h2>
+    <p class="error403-text">Adresa që kërkuat nuk ekziston ose është zhvendosur.</p>
+    <a class="btn-primary error403-btn" href="{% url 'core:home' %}">
+      Kthehu te Kryesore
+    </a>
+  </div>
+</div>
+{% endblock %}

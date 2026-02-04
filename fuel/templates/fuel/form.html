@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Forma Karburanti" }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fuel/css/form.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="fuel-page">
+  <div class="form-card">
+
+      <h2>{{ page_title|default:"Forma Karburanti" }}</h2>
+
+      <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+
+          <button class="button" type="submit">Ruaj</button>
+      </form>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tankField = document.getElementById("id_tank");
+  const dateField = document.getElementById("id_date");
+  const form = document.querySelector("form");
+
+  if (!tankField || !dateField || !form) return;
+
+  let existingDates = [];
+
+  function loadDates(tankId) {
+    if (!tankId) return;
+    fetch(`/fuel/ajax/refill-dates/${tankId}/`)
+      .then(r => r.json())
+      .then(data => { existingDates = data.dates || []; })
+      .catch(() => { existingDates = []; });
+  }
+
+  loadDates(tankField.value);
+
+  tankField.addEventListener("change", function () {
+    loadDates(this.value);
+  });
+
+  form.addEventListener("submit", function (e) {
+    const dateValue = dateField.value;
+    if (dateValue && existingDates.includes(dateValue)) {
+      e.preventDefault();
+      alert("⚠ Ekziston një furnizim për këtë depo në këtë datë!\nNuk mund të shtoni më shumë se një furnizim në të njëjtën ditë.");
+    }
+  });
+});
+</script>
+{% endblock %}

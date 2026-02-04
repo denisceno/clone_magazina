@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}" />
+{% endblock %}
+
+{% block body %}
+<div class="login-page">
+  <div class="login-box">
+    <h2>Login</h2>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".login-box form");
+    if (!form) return;
+
+    form.addEventListener("submit", () => {
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Duke hyrë...";
+      }
+    }, { once: true });
+  });
+</script>
+{% endblock %}
+
+
+
+
+
+
+

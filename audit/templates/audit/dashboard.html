@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Audit{% endblock%}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'audit/css/audit_dashboard.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+
+  <h2 class="mb-4">Audit</h2>
+
+  <!-- FILTERS -->
+  <form method="get" class="mb-3 d-flex gap-3">
+    <select name="module" class="form-select w-auto" onchange="this.form.submit()">
+      <option value="all" {% if module == "all" %}selected{% endif %}>Të gjitha modulet</option>
+      <option value="inventory" {% if module == "inventory" %}selected{% endif %}>Magazina</option>
+      <option value="fuel" {% if module == "fuel" %}selected{% endif %}>Karburanti</option>
+      <option value="core" {% if module == "core" %}selected{% endif %}>Core</option>
+      <option value="expenses" {% if module == "expenses" %}selected{% endif %}>Shpenzime</option>
+      <option value="management" {% if module == "management" %}selected{% endif %}>Management</option>
+    </select>
+
+    <select name="action" class="form-select w-auto" onchange="this.form.submit()">
+      <option value="all" {% if action == "all" %}selected{% endif %}>Të gjitha veprimet</option>
+      <option value="LOGIN" {% if action == "LOGIN" %}selected{% endif %}>Login</option>
+      <option value="LOGOUT" {% if action == "LOGOUT" %}selected{% endif %}>Logout</option>
+      <option value="CREATE" {% if action == "CREATE" %}selected{% endif %}>Create</option>
+      <option value="UPDATE" {% if action == "UPDATE" %}selected{% endif %}>Update</option>
+      <option value="DELETE" {% if action == "DELETE" %}selected{% endif %}>Delete</option>
+      <option value="WITHDRAW" {% if action == "WITHDRAW" %}selected{% endif %}>Withdraw</option>
+      <option value="RETURN" {% if action == "RETURN" %}selected{% endif %}>Return</option>
+      <option value="EXPORT" {% if action == "EXPORT" %}selected{% endif %}>Export</option>
+      <option value="ADJUST" {% if action == "ADJUST" %}selected{% endif %}>Adjust</option>
+    </select>
+  </form>
+
+  <!-- TABLE -->
+  <table class="table table-hover table-bordered align-middle audit-table">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Përdoruesi</th>
+        <th>Veprimi</th>
+        <th>Modeli</th>
+        <th>Përshkrimi</th>
+        <th>IP</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for log in logs %}
+      <tr>
+
+        <td data-label="Data">
+          {{ log.timestamp|date:"d/m/Y H:i" }}
+        </td>
+
+        <td data-label="Përdoruesi">
+          {{ log.user.username|default:"System" }}
+        </td>
+
+        <td data-label="Veprimi">
+          {% if log.action == "LOGIN" %}
+            <span class="badge bg-success">LOGIN</span>
+          {% elif log.action == "LOGOUT" %}
+            <span class="badge bg-warning text-dark">LOGOUT</span>
+          {% elif log.action == "ADD" %}
+            <span class="badge bg-success">ADD</span>
+          {% elif log.action == "UPDATE" %}
+            <span class="badge bg-warning text-dark">UPDATE</span>
+          {% elif log.action == "CREATE" %}
+            <span class="badge bg-primary">CREATE</span>
+          {% elif log.action == "DELETE" %}
+            <span class="badge bg-danger">DELETE</span>
+          {% elif log.action == "WITHDRAW" %}
+            <span class="badge bg-dark">WITHDRAW</span>
+          {% elif log.action == "RETURN" %}
+            <span class="badge bg-info text-dark">RETURN</span>
+          {% elif log.action == "EXPORT" %}
+            <span class="badge bg-secondary">EXPORT</span>
+          {% elif log.action == "ADJUST" %}
+            <span class="badge bg-info text-dark">ADJUST</span>
+          {% else %}
+            <span class="badge bg-secondary">{{ log.action }}</span>
+          {% endif %}
+        </td>
+
+        <td data-label="Modeli">
+          {{ log.model }}
+        </td>
+
+        <td data-label="Përshkrimi">
+          {{ log.description }}
+        </td>
+
+        <td data-label="IP">
+          {{ log.ip_address|default:"—" }}
+        </td>
+
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" class="text-center text-muted">
+          Nuk u gjetën të dhëna auditimi.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- PAGINATION -->
+  {% if page_obj.has_other_pages %}
+  <nav aria-label="Audit pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1&module={{ module }}&action={{ action }}">
+            &laquo; E para
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}&module={{ module }}&action={{ action }}">
+            Mbrapa
+          </a>
+        </li>
+      {% endif %}
+
+      <li class="page-item disabled">
+        <span class="page-link">
+          Faqja {{ page_obj.number }} nga {{ page_obj.paginator.num_pages }}
+        </span>
+      </li>
+
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}&module={{ module }}&action={{ action }}">
+            Para
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&module={{ module }}&action={{ action }}">
+            E fundit &raquo;
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+
+</div>
+
+{% endblock %}

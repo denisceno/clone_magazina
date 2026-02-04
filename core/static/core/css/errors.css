@@ -1,0 +1,68 @@
+/* ===============================
+   403 ERROR PAGE
+================================*/
+
+.error403-wrapper {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.error403-card {
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+  padding: 36px 28px;
+  border-radius: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+/* BIG NUMBER */
+.error403-code {
+  font-size: 88px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 10px;
+  color: var(--primary-500);
+  opacity: 0.9;
+}
+
+/* TITLE */
+.error403-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+/* DESCRIPTION */
+.error403-text {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* BUTTON */
+.error403-btn {
+  display: inline-block;
+  padding: 10px 20px;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 576px) {
+  .error403-code {
+    font-size: 64px;
+  }
+
+  .error403-title {
+    font-size: 20px;
+  }
+
+  .error403-card {
+    padding: 26px 18px;
+  }
+}

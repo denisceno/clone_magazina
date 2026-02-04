@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Karburanti{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fuel/css/fuel-home.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="fuel-box">
+
+    <!-- CENTER TANK CARDS -->
+    <div class="tank-section">
+        {% for tank in tanks %}
+        <div class="tank-card">
+    <h3>{{ tank.name }}</h3>
+
+    <p><strong>Kapaciteti: {{ tank.capacity }} L</strong></p>
+
+    <p><strong>Gjendja:</strong></p>
+    {% if tank.current_level > 100 %}
+        <p class="cureent-level">{{ tank.current_level }} L</p>
+    {% else %}
+        <p class="need-refill">{{ tank.current_level }} L</p>
+    {% endif %}
+
+    {% if tank.open_refill %}
+        <div class="tank-refill-box">
+
+            <!-- STATUS -->
+            {% if tank.open_refill.is_closed %}
+                <span class="status-pill status-closed">Mbyllur</span>
+            {% endif %}
+
+            <!-- CLOSE BUTTON -->
+            {% if not tank.open_refill.is_closed %}
+                <form method="post"
+                      action="{% url 'fuel:fuel-entry-close' tank.open_refill.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-close-refill">
+                        Mbyll furnizimin
+                    </button>
+                </form>
+            {% endif %}
+
+        </div>
+    {% else %}
+        <div class="tank-no-refill">
+            <span class="status-pill status-muted">Pa furnizim aktiv</span>
+        </div>
+    {% endif %}
+</div>
+
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- BUTTONS BELOW TANK BOX (same place, same layout) -->
+<div class="button-row">
+    <a class="button button-success" href="{% url 'fuel:fuel-add-entry' %}">Furnizim i Depozitës</a>
+    <a class="button button-danger" href="{% url 'fuel:fuel-add-usage' %}">Dalje nga Depozita</a>
+</div>
+
+<hr class="fuel-divider">
+
+<h2 class="fuel-title">Dalje nga Magazina</h2>
+
+<div class="fuel-links">
+    <a class="button" href="{% url 'fuel:fuel-entries' %}">Furnizimet e Depozitës</a>
+    <a class="button" href="{% url 'fuel:vehicle-usage' %}">Daljet Sipas Targave</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Targa</th>
+            <th>Sasia (L)</th>
+            <th>Operatori</th>
+            <th>Shënime</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for u in usages %}
+        <tr>
+            <td>{{ u.date|date:"d/m/Y" }}</td>
+            <td>{{ u.vehicle|default:"—" }}</td>
+            <td><strong>{{ u.amount }}</strong></td>
+            <td>{{ u.operator|default:"—" }}</td>
+            <td>{{ u.project|default:"—" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="table-empty">Nuk ka dalje të regjistruara.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

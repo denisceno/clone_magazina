@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/tanks.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">Depozitat e Karburantit</h2>
+
+  <div class="inventory-grid">
+    {% for t in tanks %}
+      <a href="{% url 'management:tank-detail' t.pk %}" class="inventory-card">
+        <h3>{{ t.name }}</h3>
+        <p>Shiko detajet e depozitës</p>
+
+        <div class="card-meta">
+          <div class="meta-row">
+            <strong>Kapaciteti</strong>
+            <span>{{ t.capacity }} L</span>
+          </div>
+          <div class="meta-row">
+            <strong>Gjendja</strong>
+            <span>{{ t.current_level }} L</span>
+          </div>
+        </div>
+      </a>
+    {% empty %}
+      <p>Nuk ka depozita.</p>
+    {% endfor %}
+  </div>
+
+  <div class="page-actions center">
+    <a class="btn-primary" href="{% url 'management:tank-create' %}">+ Shto Depozitë</a>
+    <a class="btn-secondary" href="{% url 'management:dashboard' %}">← Management</a>
+  </div>
+
+</div>
+{% endblock %}

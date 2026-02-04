@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/depots.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">Magazinat</h2>
+
+  <div class="inventory-grid">
+    {% for d in depots %}
+      <a href="{% url 'management:depot-detail' d.pk %}" class="inventory-card">
+        <h3>{{ d.name }}</h3>
+        <p>Shiko detajet e magazinës</p>
+      </a>
+    {% empty %}
+      <p>Nuk ka magazina.</p>
+    {% endfor %}
+  </div>
+
+  <div class="page-actions center">
+    <a class="btn-primary" href="{% url 'management:depot-create' %}">+ Shto Magazinë</a>
+    <a class="btn-secondary" href="{% url 'management:dashboard' %}">← Management</a>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+# ==============================
+# PYTHON
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# ==============================
+# DJANGO
+# ==============================
+*.log
+local_settings.py
+db.sqlite3
+*.sqlite3
+
+# Media uploads (optional — keep if users upload files)
+media/
+
+# Static files collected in production
+staticfiles/
+
+# ==============================
+# ENVIRONMENT VARIABLES
+# ==============================
+.env
+.env.*
+*.env
+
+# ==============================
+# VS CODE / IDE
+# ==============================
+.vscode/
+.idea/
+
+# ==============================
+# MAC SYSTEM FILES
+# ==============================
+.DS_Store
+
+# ==============================
+# MIGRATION CACHE
+# (do NOT ignore migrations folder itself)
+# ==============================
+*.pyc
+
+# ==============================
+# TEST / COVERAGE
+# ==============================
+htmlcov/
+.coverage
+coverage.xml
+
+# ==============================
+# NODE (if you ever add frontend build tools)
+# ==============================
+node_modules/
+dist/
+build/

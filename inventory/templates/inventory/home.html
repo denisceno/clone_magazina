@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Magazina{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/home.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inv-home">
+
+  <div class="hero-card">
+      <a href="{% url 'inventory:all-products' %}" class="text-decoration-none text-dark">
+          <h4>Magazina Kryesore</h4>
+      </a>
+  </div>
+
+  <div class="page-actions">
+      <a href="{% url 'inventory:add-product' %}" class="btn inv-btn inv-btn-hyrje">Hyrje</a>
+      <a href="{% url 'inventory:create-withdrawal' %}" class="btn inv-btn inv-btn-dalje">Dalje</a>
+      <a href="{% url 'inventory:employee-list' %}" class="btn inv-btn inv-btn-neutral">Paisjet Në Përdorim</a>
+  </div>
+
+  <div class="row g-4 depot-grid">
+      {% for depot in depots %}
+      <div class="col-md-3">
+          <a href="{% url 'inventory:depot-detail' depot.id %}" class="text-decoration-none text-dark">
+              <div class="inventory-card {% if not depot.is_active %}inventory-card-inactive{% endif %}">
+                  <h4>{{ depot.name }}</h4>
+              </div>
+          </a>
+      </div>
+      {% empty %}
+      <p class="text-center mt-5">Nuk Ka Magazina Te Krijuara</p>
+      {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

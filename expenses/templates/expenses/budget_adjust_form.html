@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Shto/Zbrit Buxhetin{% endblock%}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'expenses/css/budget_adjust_form.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="form-card">
+
+  <h3>Shto/Zbrit Buxhetin </h3>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-fields">
+      {{ form.as_p }}
+    </div>
+
+    <button type="submit" class="form-submit">Ruaj</button>
+  </form>
+
+</div>
+
+{% endblock %}

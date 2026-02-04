@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'management/css/tanks.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventory-wrapper">
+
+  <h2 class="page-title">{{ tank.name }}</h2>
+
+  <div class="detail-card">
+    <h3>Detajet e Depozitës</h3>
+
+    <ul class="detail-list">
+      <li><strong>Emri</strong> <span>{{ tank.name }}</span></li>
+      <li><strong>Kapaciteti</strong> <span>{{ tank.capacity }} L</span></li>
+      <li><strong>Gjendja Aktual</strong> <span>{{ tank.current_level }} L</span></li>
+    </ul>
+
+    <div class="page-actions" style="justify-content:flex-end;">
+      <a class="btn-primary" href="{% url 'management:tank-edit' tank.pk %}">Edit</a>
+      <a class="btn-danger" href="{% url 'management:tank-delete' tank.pk %}">Delete</a>
+      <a class="btn-secondary" href="{% url 'management:tank-list' %}">← Back</a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

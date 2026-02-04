@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ depot.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/depot_detail.css' %}" />
+{% endblock %}
+
+{% block body %}
+
+<div class="page-header">
+  <h2>{{ depot.name }}</h2>
+</div>
+
+  {% if depot.description %}
+    <p class="depot-description">{{ depot.description }}</p>
+  {% endif %}
+<div class="products-page">
+
+
+
+  <!-- SEARCH (LIVE - NO RELOAD) -->
+  <form method="GET" class="search-bar" id="search-form">
+    <input
+      type="text"
+      id="live-search"
+      name="q"
+      value="{{ search }}"
+      placeholder="Kërko Materialin..."
+      autocomplete="off"
+    />
+  </form>
+
+  <!-- TABLE -->
+  <div class="table-wrapper">
+    <table class="styled-table" id="products-table">
+      <thead>
+        <tr>
+          <th>Emri</th>
+          <th>Sasia</th>
+          <th>Kategoria</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for product in products %}
+        <tr class="product-row"
+            data-name="{{ product.name|lower }}"
+            data-type="{{ product.get_item_type_display|lower }}">
+          <td>
+            <a href="{% url 'inventory:product-detail' product.id %}" class="product-link">
+              {{ product.name }}
+            </a>
+          </td>
+
+          <td>
+            {% if product.item_type == "returnable" %}
+              {{ product.total_quantity }}{% if product.unit != "pcs" %} {{ product.get_unit_display }}{% endif %}
+              <span class="muted">
+                ({{ product.quantity }}{% if product.unit != "pcs" %} {{ product.get_unit_display }}{% endif %} në Magazina)
+              </span>
+            {% else %}
+              {{ product.quantity }}{% if product.unit != "pcs" %} {{ product.get_unit_display }}{% endif %}
+            {% endif %}
+          </td>
+
+          <td>{{ product.get_item_type_display }}</td>
+        </tr>
+        {% empty %}
+        <tr id="no-results-row">
+          <td colspan="3" class="no-results">Nuk ka materiale në këtë Magazinë</td>
+        </tr>
+        {% endfor %}
+
+        <!-- This row is used when filtering hides everything -->
+        <tr id="no-results-filter" style="display:none;">
+          <td colspan="3" class="no-results">Nuk ka produkt me këtë emër</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const searchInput = document.getElementById("live-search");
+  const form = document.getElementById("search-form");
+  const rows = document.querySelectorAll("#products-table tbody .product-row");
+  const noResultsFromDjango = document.getElementById("no-results-row");
+  const noResultsFilterRow = document.getElementById("no-results-filter");
+
+  // prevent Enter submit (optional)
+  form.addEventListener("submit", (e) => e.preventDefault());
+
+  function filterRows() {
+    const q = (searchInput.value || "").trim().toLowerCase();
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      // Search across name + category (you can change to name-only if you want)
+      const haystack = (row.dataset.name || "") + " " + (row.dataset.type || "");
+      const match = haystack.includes(q);
+
+      row.style.display = match ? "" : "none";
+      if (match) visibleCount++;
+    });
+
+    // If Django "empty" row exists, hide it when we have actual rows
+    if (noResultsFromDjango) {
+      noResultsFromDjango.style.display = rows.length === 0 ? "" : "none";
+    }
+
+    // Show our "filtered empty" row when nothing matches
+    if (noResultsFilterRow) {
+      // Only show filtered-empty if there ARE rows in the table originally
+      noResultsFilterRow.style.display = (rows.length > 0 && visibleCount === 0) ? "" : "none";
+    }
+  }
+
+  // Live filter while typing (no reload)
+  searchInput.addEventListener("input", filterRows);
+
+  // Apply filter immediately if input has value (e.g. coming from previous search)
+  filterRows();
+</script>
+
+{% endblock %}

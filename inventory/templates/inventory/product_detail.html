@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+ {% load static %} 
+
+{% block title %}{{ product.name }}{% endblock %}
+
+ {% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/product_detail.css' %}" />
+{% endblock %} 
+{% block body %}
+
+<div class="product-page">
+  <h1 class="product-title">{{ product.name }}</h1>
+
+  <div class="product-card">
+    <p><strong>Përshkrimi:</strong> {{ product.description|default:"—" }}</p>
+    <p><strong>Çmimi:</strong> {{ product.price }}</p>
+    <p><strong>Magazina:</strong> {{ product.depot.name }}</p>
+    <p><strong>Kategoria:</strong> {{ product.get_item_type_display }}</p>
+    <p><strong>Data e hyrjes:</strong> {{ product.date }}</p>
+    {% if product.item_type == "returnable" %}
+    <p class="fs-5 mt-3">
+      <strong>Sasia Totale:</strong>
+      <span class="stock-in">{{ total_stock }} {% if product.unit != "pcs" %} 
+           {{product.get_unit_display }}
+            {% endif %}
+          </span>
+    </p>
+    {% endif %}
+     {% if product.item_type == "consumable" %}
+    <div class="stock-grid-wide">
+      <div class="stock-box">
+        <p>Në Magazinë</p>
+        <h4 class="stock-in">
+          {{ product.quantity }}
+           {% if product.unit != "pcs" %} 
+           {{product.get_unit_display }}
+            {% endif %}
+        </h4>
+      </div>
+    </div>
+    {% else %}
+    <div class="stock-grid">
+      <div class="stock-box">
+        <p>Në Magazinë</p>
+        <h4 class="stock-in">
+          {{ product.quantity }}
+          {% if product.unit != "pcs" %} 
+            {{product.get_unit_display }} 
+          {% endif %}
+        </h4>
+      </div>
+
+      <div class="stock-box">
+        <p>Jashtë Magazinës</p>
+        <h4 class="stock-out">
+          {{ total_taken }}
+          {% if product.unit != "pcs" %} 
+          {{product.get_unit_display }} 
+          {% endif %}
+        </h4>
+      </div>
+    </div>
+    {% endif %} 
+    {% if product.item_type == "returnable" %}
+    <div class="product-card">
+      <h3 class="text-center">Materiale për tu Rikthyer</h3>
+
+      {% if items_display %}
+      <ul class="withdraw-list">
+        {% for item in items_display %}
+        <li>
+          <div class="withdraw-meta">
+            <strong>{{ item.employee }}</strong>
+            <small>{{ item.date|date:"d M Y" }} — {{ item.notes|default:"—"}}</small>
+          </div>
+          <div class="withdraw-qty">{{ item.qty }}</div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-muted text-center">Asnjë material jashtë magazinës.</p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="product-actions">
+      <div class="action-group">
+        <a href="{% url 'inventory:add-quantity' product.id %}" class="btn-success-alt"
+          >Shto Sasinë</a
+        >
+        {% if user.is_superuser %}
+        <a href="{% url 'inventory:edit-product' product.id %}" class="btn-warning-alt"
+          >Modifiko</a
+        >
+        <a
+          href="{% url 'inventory:delete-product' product.id %}"
+          class="btn-danger-alt"
+          onclick="return confirm('Are you sure?')"
+          >Fshi</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+
+    <title>{% block title %} {% endblock %}</title>
+
+    <!-- Set theme ASAP (prevents flash) -->
+    <script>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initial = saved || (systemDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", initial);
+      })();
+    </script>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme_toggle.css' %}">  {# ✅ NEW FILE #}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="icon" href="{% static 'core/favicon.ico' %}">
+
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    {% if user.is_authenticated %}
+      {% include "includes/navbar.html" %}
+    {% endif %}
+
+    {% block body %}{% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
+    <!-- THEME SYNC: Desktop toggle + Offcanvas toggle + Hamburger mini icon -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const root = document.documentElement;
+
+        const desktopToggle = document.getElementById("themeToggleDesktop");
+        const offcanvasToggle = document.getElementById("themeToggleOffcanvas");
+        const iconToggle = document.getElementById("themeIconToggle");
+
+        function setTheme(theme) {
+          root.setAttribute("data-theme", theme);
+          try { localStorage.setItem("theme", theme); } catch (e) {}
+
+          const isDark = theme === "dark";
+          if (desktopToggle) desktopToggle.checked = isDark;
+          if (offcanvasToggle) offcanvasToggle.checked = isDark;
+        }
+
+        // theme already set in <head>, just sync UI
+        const current = root.getAttribute("data-theme") || "light";
+        setTheme(current);
+
+        if (desktopToggle) {
+          desktopToggle.addEventListener("change", () => {
+            setTheme(desktopToggle.checked ? "dark" : "light");
+          });
+        }
+
+        if (offcanvasToggle) {
+          offcanvasToggle.addEventListener("change", () => {
+            setTheme(offcanvasToggle.checked ? "dark" : "light");
+          });
+        }
+
+        if (iconToggle) {
+          const flip = () => {
+            const now = root.getAttribute("data-theme") || "light";
+            setTheme(now === "dark" ? "light" : "dark");
+          };
+
+          iconToggle.addEventListener("click", (e) => {
+            e.stopPropagation(); // do not open offcanvas
+            flip();
+          });
+
+          iconToggle.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              e.stopPropagation();
+              flip();
+            }
+          });
+        }
+      });
+    </script>
+
+    <!-- Close offcanvas when clicking a link -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const offcanvasEl = document.getElementById("appOffcanvas");
+        if (!offcanvasEl) return;
+
+        offcanvasEl.addEventListener("click", function (e) {
+          const link = e.target.closest("a[href]");
+          if (!link) return;
+
+          const href = link.getAttribute("href");
+          if (!href || href === "#") return;
+
+          e.preventDefault();
+
+          const instance =
+            bootstrap.Offcanvas.getInstance(offcanvasEl) ||
+            new bootstrap.Offcanvas(offcanvasEl);
+
+          instance.hide();
+
+          setTimeout(() => {
+            window.location.href = href;
+          }, 150);
+        });
+      });
+    </script>
+
+    <script>
+      // Fix BFCache (mobile back/forward restores old CSRF forms)
+      window.addEventListener("pageshow", function (event) {
+        if (event.persisted) window.location.reload();
+      });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

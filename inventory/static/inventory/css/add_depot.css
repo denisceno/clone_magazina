@@ -1,0 +1,114 @@
+/* ======================================================
+   FORM CARD CONTAINER
+====================================================== */
+.form-card {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 35px;
+
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: var(--shadow-md);
+  transition: 0.25s ease;
+}
+
+.form-card:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Title */
+.form-card h3 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* ======================================================
+   DJANGO FORM FIELD STYLING
+====================================================== */
+.form-fields p {
+  margin-bottom: 18px;
+}
+
+.form-fields label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.form-fields input,
+.form-fields select,
+.form-fields textarea {
+  width: 100%;
+  padding: 12px 14px;
+  box-sizing: border-box;
+
+  border-radius: 12px;
+  border: 1px solid var(--gray-300);
+  background: var(--bg-card);
+
+  font-size: 14px;
+  color: var(--text-primary);
+
+  transition: 0.25s ease;
+}
+
+.form-fields input:focus,
+.form-fields select:focus,
+.form-fields textarea:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(12, 117, 255, 0.2);
+  outline: none;
+}
+
+/* ======================================================
+   SUBMIT BUTTON
+====================================================== */
+.form-submit {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(63, 90, 255, 0.25);
+  transition: 0.25s ease-in-out;
+}
+
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(63, 90, 255, 0.35);
+}
+
+/* Scoped error list styling */
+.form-card .errorlist {
+  margin: 0 0 8px 0;
+  padding-left: 18px;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+/* ======================================================
+   DARK MODE — keep glass readable
+====================================================== */
+:root[data-theme="dark"] .form-card {
+  background: rgba(15, 26, 43, 0.72);
+  border: 1px solid var(--border-color);
+}

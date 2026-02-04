@@ -1,0 +1,190 @@
+/* ======================================================
+   PRETTY THEME TOGGLE — SUN / MOON
+   Standalone file
+====================================================== */
+
+/* ---------------------------------
+   BASE WRAPPER
+---------------------------------- */
+.theme-switch--pretty {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+
+/* hide native checkbox */
+.theme-switch--pretty input {
+  display: none;
+}
+
+/* ---------------------------------
+   TRACK
+---------------------------------- */
+.theme-switch--pretty .theme-track {
+  width: 68px;
+  height: 30px;
+  border-radius: 999px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--bg-muted) 65%, var(--bg-card)) 0%,
+    color-mix(in srgb, var(--bg-card) 70%, var(--bg-muted)) 100%
+  );
+
+  border: 1px solid color-mix(in srgb, var(--border-color) 80%, transparent);
+
+  box-shadow:
+    0 10px 26px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.45);
+
+  transition: background 0.25s ease,
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+
+/* ---------------------------------
+   ICONS
+---------------------------------- */
+.theme-switch--pretty .theme-ico {
+  width: 16px;
+  height: 16px;
+  opacity: 0.85;
+  transition: transform 0.35s ease,
+              opacity 0.25s ease,
+              filter 0.35s ease;
+}
+
+/* SUN */
+.theme-switch--pretty .theme-ico--sun {
+  background: color-mix(in srgb, #f59e0b 85%, var(--text-primary));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12Z'/%3E%3C/svg%3E") no-repeat center / contain;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12Z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* MOON */
+.theme-switch--pretty .theme-ico--moon {
+  background: color-mix(in srgb, #e5e7eb 80%, var(--text-primary));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5Z'/%3E%3C/svg%3E") no-repeat center / contain;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5Z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ---------------------------------
+   THUMB
+---------------------------------- */
+.theme-switch--pretty .theme-thumb {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.92) 0%,
+    color-mix(in srgb, var(--bg-card) 88%, #ffffff) 100%
+  );
+
+  border: 1px solid color-mix(in srgb, var(--border-color) 85%, transparent);
+
+  box-shadow:
+    0 10px 22px rgba(15, 23, 42, 0.14),
+    inset 0 1px 0 rgba(255,255,255,0.65);
+
+  transition:
+    left 0.28s cubic-bezier(.2,.8,.2,1),
+    transform 0.28s ease,
+    background 0.25s ease;
+}
+
+/* ---------------------------------
+   DARK STATE
+---------------------------------- */
+.theme-switch--pretty input:checked + .theme-track {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #0b1220 70%, var(--bg-card)) 0%,
+    color-mix(in srgb, #111827 75%, var(--bg-card)) 100%
+  );
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.theme-switch--pretty input:checked + .theme-track .theme-thumb {
+  left: calc(100% - 28px);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #111827 70%, var(--bg-card)) 0%,
+    color-mix(in srgb, #0b1220 80%, var(--bg-card)) 100%
+  );
+}
+
+/* icon emphasis */
+.theme-switch--pretty input:checked + .theme-track .theme-ico--sun {
+  opacity: 0.55;
+  transform: scale(0.9);
+}
+
+.theme-switch--pretty input:checked + .theme-track .theme-ico--moon {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* ---------------------------------
+   COMPACT VERSION (offcanvas)
+---------------------------------- */
+.theme-switch--pretty-compact .theme-track {
+  width: 60px;
+  height: 26px;
+  padding: 0 9px;
+}
+
+.theme-switch--pretty-compact .theme-thumb {
+  width: 20px;
+  height: 20px;
+}
+
+.theme-switch--pretty-compact input:checked + .theme-track .theme-thumb {
+  left: calc(100% - 24px);
+}
+
+/* ---------------------------------
+   HAMBURGER MINI ICON
+---------------------------------- */
+.theme-icon-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.theme-icon-btn .theme-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+:root[data-theme="light"] .theme-icon {
+  background: #f59e0b;
+  box-shadow: 0 0 0 4px rgba(245,158,11,0.25);
+}
+
+:root[data-theme="dark"] .theme-icon {
+  background: #e5e7eb;
+  box-shadow: inset -5px -5px 0 var(--bg-card);
+}

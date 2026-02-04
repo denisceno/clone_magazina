@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detaje Materialet Jashtë Magazinës{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'inventory/css/withdrawal_detail.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="detail-wrap">
+
+  <h2 class="detail-title">Detaje të Daljes</h2>
+
+  <div class="detail-card">
+    <p><strong>Materiali:</strong> {{ item.product.name }}</p>
+    <p><strong>Sasia:</strong> <span class="qty-blue">{{ item.quantity }}</span></p>
+    <p><strong>Data:</strong> {{ header.date }}</p>
+    <p><strong>Punonjësi:</strong> {{ header.employee }}</p>
+    <div class="notes-block">
+      <strong>Shënime:</strong>
+      <div class="notes-box">
+        {{ header.notes|default:"Nuk ka shënime." }}
+      </div>
+    </div>
+  </div>
+
+  <a href="{% url 'inventory:employee-detail' header.employee.id %}" class="back-link">
+  </a>
+
+</div>
+{% endblock %}
